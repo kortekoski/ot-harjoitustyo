@@ -1,0 +1,113 @@
+commit 07bddc284ddbc627c00a85ce46edea4151ce709f
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:49:26 2024 +0200
+
+    file22 lisäys
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit dd758aac9f4694783faad7ff26b3a6ac36b7e9c0
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:47:00 2024 +0200
+
+    tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c1aeaedadff9114e43619d10441d2f44cbd22db8
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:29:55 2024 +0200
+
+    eka kolmas muutos
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit a83e6dd2efefca942041a5cd27748de72b0ccffb
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:27:06 2024 +0200
+
+    eka lisätty
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 8fddc989b323ed15bed5e84f98ca8e9a4b5d2a96
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:25:09 2024 +0200
+
+    toinen poisto
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 04a7ed37d4bec2c8c9fdaa177e8d6f74c744c533
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:21:58 2024 +0200
+
+    teksti muutettu
+
+ tiedosto.txt | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit 3a9d25b9e9f9bc2c626f7ee535606be6ccdc0d90
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:21:00 2024 +0200
+
+    teksti lisätty
+
+ tiedosto.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit a912ddffcd77e0f57ffbbd664affb3cc3f2cbb2c
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:13:16 2024 +0200
+
+    kansio lisätty
+
+ stuff/stuff.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c9ec2fa057b3db93a0ddac080888350d0b85851d
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:10:43 2024 +0200
+
+    muutos toiseen ja kolmanteen
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit d9042d6020b31f0e9dab5c7448e589b01bb0166d
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:09:43 2024 +0200
+
+    kolmas lisäys
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 9c9058024f46cf1efe22b14390fea99a9811f6ed
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Thu Mar 14 20:05:43 2024 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 108efb6e78b4cbd6e15b7e3d568ebd44e2e060ac
+Author: kortekoski <mika.kortekoski@gmail.com>
+Date:   Wed Mar 13 15:02:19 2024 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
