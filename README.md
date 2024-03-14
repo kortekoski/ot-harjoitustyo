@@ -1,5 +1,8 @@
-# Otsikko
+# Ohjelmistotekniikka, harjoitustyö
 
-## Alaotsikko
+## Tehtävät
 
-Tässä on jännittävää tekstiä. Osa on **lihavoitu**, osa _kursivoitu_. Onpa jännää!
+### Viikko 1
+[gitlog.txt](https://github.com/kortekoski/ot-harjoitustyo/blob/main/laskarit/viikko1/gitlog.txt)
+
+[komentorivi.txt](https://github.com/kortekoski/ot-harjoitustyo/blob/main/laskarit/viikko1/komentorivi.txt)
