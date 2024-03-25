@@ -4,6 +4,9 @@ class Kassapaate:
         self.edulliset = 0
         self.maukkaat = 0
 
+    def myytyja_lounaita(self):
+        return self.edulliset + self.maukkaat
+
     def syo_edullisesti_kateisella(self, maksu):
         if maksu >= 240:
             self.kassassa_rahaa = self.kassassa_rahaa + 240
