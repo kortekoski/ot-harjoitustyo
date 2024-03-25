@@ -3,6 +3,7 @@
 ## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
+
 [Työaikakirjanpito](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
 
 ## Tehtävät
