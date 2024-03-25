@@ -19,6 +19,7 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
   - taustakuva.
 - Pelinäkymässä ruutu liikkuu hahmon mukana.
 - Pelinäkymässä soi taustamusiikki.
+- Pelinäkymästä siirrytään takaisin päävalikkoon, kun hahmo pääsee kentän loppuun.
 
 ### Pelaajan hahmo
 - Kävely: hahmo liikkuu x-akselilla, kun vasenta/oikeaa nuolta pidetään pohjassa.
@@ -28,10 +29,11 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 
 ### Kenttä
 - Kenttä koostuu erinäisistä tasoista, joiden päällä hahmo voi liikkua tippumatta alas. Jos hahmo tippuu ruudun alalaitaan, kenttä on aloitettava alusta.
-- Jokaisessa kentässä soi yksilöllinen musiikkikappale.
-- Kentässä on kahdenlaisia esteitä: toiset täytyy väistää hyppäämällä, toiset tuhota lyömällä. Jos pelaaja epäonnistuu väistämisessä tai tuhoamisessa, kenttä on aloitettava alusta. Hahmo ei siis saa osua esteisiin.
+- Kentässä on kahdenlaisia esteitä: toiset täytyy väistää hyppäämällä, toiset tuhota lyömällä.
+- Vasemmalta pelaajaa lähestyy koko ruudun korkuinen seinä, joka pakottaa pelaajan liikkeelle.
+- Joten kun pelaaja osuu ruudun alareunaan, esteesen tai seinään, hahmo räjähtää ja pelaaja on epäonnistunut kentän läpäisemisessä. Tällöin aukeaa valikko, josta voi valita, yrittääkö uudelleen (kenttä alkaa alusta) vai luovuttaako (siirrytään päävalikkoon).
+- Kun saavutaa kentän oikean reunan, se on läpäisty ja siirrytään päävalikkoon.
 - Tasot ja esteet on ajoitettu taustamusiikin mukaisesti siten, että jos pelaaja ajoittaa hypyt ja lyönnit oikein rytmiin, hän onnistuu läpäisemään kentän.
-- Vasemmalta pelaajaa lähestyy koko ruudun korkuinen seinä, joka pakottaa pelaajan liikkeelle. Jos seinään osuu, taso alkaa alusta.
 - Kentässä on viisi kerättävää erikoisesinettä, jotka saa kun hahmo osuu niihin.
 - Kentässä on myös vähemmän erikoisia esineitä (esim. kolikoita), jotka saa kun hahmo osuu niihin.
 
