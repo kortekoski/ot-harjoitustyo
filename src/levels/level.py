@@ -71,6 +71,7 @@ class Level:
         if self._player_can_move(0, -self.player.jump_velocity):
             self.player.rect.y -= self.player.jump_velocity
         
+        
         self.player.jump_velocity -= self.player.jump_gravity
         
         if self.player.jump_velocity < -self.player.jump_height:

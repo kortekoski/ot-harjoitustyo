@@ -1,4 +1,6 @@
-# Ohjelmistotekniikka, harjoitustyö
+# Ohjelmistotekniikan harjoitustyö: OT-Peli
+
+Sovelluksen visio on tasohyppelypeli, jossa liikutaan musiikin rytmissä. Toistaiseksi sovellus on kuitenkin vain pieni ruutu, jossa keltainen neliö voi hyppiä mustien neliöiden päällä. Keltaiselle neliölle on piirretty veikeä naama.
 
 ## Dokumentaatio
 
@@ -6,14 +8,23 @@
 
 [Työaikakirjanpito](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
 
-## Tehtävät
+[Changelog](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
 
-### Viikko 1
+## Komentorivitoiminnot
 
-[gitlog.txt](https://github.com/kortekoski/ot-harjoitustyo/blob/main/laskarit/viikko1/gitlog.txt)
+### Suorittaminen
+```bash
+poetry run invoke start
+```
 
-[komentorivi.txt](https://github.com/kortekoski/ot-harjoitustyo/blob/main/laskarit/viikko1/komentorivi.txt)
+### Testaus
+```bash
+poetry run invoke test
+```
 
-### Viikko 2
+### Testikattavuuden raportti
+```bash
+poetry run invoke coverage-report
+```
 
-[Converge-kuvakaappaus](https://github.com/kortekoski/ot-harjoitustyo/blob/main/laskarit/viikko2/coverage_kaappaus.png)
+Raportti löytyy hakemistosta _htmlcov_.
