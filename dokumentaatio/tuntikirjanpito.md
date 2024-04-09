@@ -7,5 +7,5 @@
 | 4.4.  | 2    | pelaajan liikkumisen hahmottelua |
 | 8.4.  | 2    | tason kehittäminen, läpimenon estäminen x-tasolla |
 | 9.4.  | 2    | ensimmäiset testit, coverage, invoke |
-| 9.4.  | 3    | moduulien rakenteen uudelleenjärjestely, pelaajan hyppy, spritejen läpimenon estäminen y-tasolla |
-| yht   | 11    | |
+| 9.4.  | 5    | moduulien rakenteen uudelleenjärjestely, pelaajan hyppy, spritejen läpimenon estäminen y-tasolla |
+| yht   | 13    | |

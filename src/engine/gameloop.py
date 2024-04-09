@@ -7,6 +7,10 @@ class GameLoop:
         self._event_queue = event_queue
         self._clock = clock
         self._cell_size = cell_size
+
+        self._failed = False
+        self._success = False
+
         self.dt = 0
 
     def start(self):
@@ -14,13 +18,28 @@ class GameLoop:
             if self._handle_events() == False:
                 break
             
-            self._handle_player_movement()
-            self._gravity()
+            if not self._failed:
+                self._handle_player_movement()
+                self._gravity()
 
-            self._render()
+                self._check_success()
+                self._check_fail()
 
-            self.dt = self._clock.tick(60) / 1000
+                self._render()
 
+                self.dt = self._clock.tick(60) / 1000
+            elif self._success:
+                self._render_success()
+            else:
+                self._render_fail()
+
+    def _check_success(self):
+        if self._level.player_succeeded():
+            self._success = True
+
+    def _check_fail(self):
+        if self._level.player_fallen():
+            self._failed = True
 
     def _handle_player_movement(self):
         keys = pygame.key.get_pressed()
@@ -53,15 +72,23 @@ class GameLoop:
 
     def _gravity(self):
         if not self._level.player.is_jumping():
-            self._level.move_player(0, 2)
+            self._level.move_player(0, 15)
 
     def _handle_events(self):
         for event in self._event_queue.get():
             if event.type == pygame.KEYDOWN:
-                # pause menu, restart level etc will be here
-                pass
+                if event.key == pygame.K_r:
+                    self._level.restart_level()
+                    self._failed = False
+                    self._success = False
             elif event.type == pygame.QUIT:
                 return False
             
     def _render(self):
         self._renderer.render()
+
+    def _render_fail(self):
+        self._renderer.render_text("FAILED, press R to restart")
+
+    def _render_success(self):
+        self._renderer.render_text("SUCCESS!!")
