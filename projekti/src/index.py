@@ -1,6 +1,4 @@
 import pygame
-from sprites.player import Player
-from sprites.platform import Platform
 
 from levels.level import Level
 
@@ -15,7 +13,8 @@ LEVEL_MAP = [[0, 0, 0, 0, 0, 0],
              [0, 1, 4, 0, 0, 0],
              [0, 1, 1, 1, 0, 0]]
 
-CELL_SIZE = 50 
+CELL_SIZE = 50
+
 
 def main():
     height = len(LEVEL_MAP)
@@ -34,6 +33,7 @@ def main():
 
     pygame.init()
     game_loop.start()
+
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,8 @@
-import pygame
 import os
+import pygame
 
 dirname = os.path.dirname(__file__)
+
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, position):

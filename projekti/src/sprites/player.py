@@ -1,7 +1,8 @@
-import pygame
 import os
+import pygame
 
 dirname = os.path.dirname(__file__)
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, position):
@@ -24,15 +25,14 @@ class Player(pygame.sprite.Sprite):
         self.jump_velocity = self.jump_height
         self.jump_gravity = 1
 
-        
     def set_ms(self, x):
         self.move_speed = x
 
     def get_position(self):
         return (self.rect.x, self.rect.y)
-    
+
     def is_jumping(self):
         if self.jumping or self.sprint_jumping:
             return True
-        
+
         return False

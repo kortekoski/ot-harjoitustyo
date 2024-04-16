@@ -3,6 +3,7 @@ from sprites.player import Player
 from sprites.platform import Platform
 from sprites.background import Background
 
+
 class Level:
     def __init__(self, level_map, cell_size):
         self.cell_size = cell_size
@@ -32,13 +33,15 @@ class Level:
                 normalized_y = y * self.cell_size
 
                 if cell == 0:
-                    self.backgrounds.add(Background((normalized_x, normalized_y)))
+                    self.backgrounds.add(Background(
+                        (normalized_x, normalized_y)))
                 elif cell == 1:
                     self.platforms.add(Platform((normalized_x, normalized_y)))
                 elif cell == 4:
                     self.player = Player((normalized_x, normalized_y))
-                    self.backgrounds.add(Background((normalized_x, normalized_y)))
-        
+                    self.backgrounds.add(Background(
+                        (normalized_x, normalized_y)))
+
         self.all_sprites.add(
             self.backgrounds,
             self.platforms,
@@ -51,31 +54,27 @@ class Level:
     def move_player(self, dx=0, dy=0):
         if not self._player_can_move(dx, dy):
             return
-        
+
         self.player.rect.move_ip(dx, dy)
 
     def _player_can_move(self, x=0, y=0):
         self.player.rect.move_ip(x, y)
 
-        colliding_platforms = pygame.sprite.spritecollide(self.player, self.platforms, False)
+        colliding_platforms = pygame.sprite.spritecollide(
+            self.player, self.platforms, False)
         can_move = not colliding_platforms
 
         self.player.rect.move_ip(-x, -y)
         return can_move
-    
-    def _check_jump(self, y):
-        x = self.rect.x
-        self.player.rect.move_ip(x, y)
-    
+
     def jump_player(self):
         if self._player_can_move(0, -self.player.jump_velocity):
             self.player.rect.y -= self.player.jump_velocity
-        
-        
+
         self.player.jump_velocity -= self.player.jump_gravity
-        
+
         if self.player.jump_velocity < -self.player.jump_height:
-            
+
             self.player.jumping = False
             self.player.sprint_jumping = False
             self.player.jump_velocity = self.player.jump_height
@@ -83,7 +82,10 @@ class Level:
     def player_fallen(self):
         if self.player.rect.y > len(self.level_map) * self.cell_size:
             return True
-        
+        return False
+
     def player_succeeded(self):
         if self.player.rect.x > len(self.level_map[0]) * self.cell_size:
             return True
+        return False
+    

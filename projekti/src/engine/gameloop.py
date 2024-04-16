@@ -1,5 +1,6 @@
 import pygame
 
+
 class GameLoop:
     def __init__(self, level, renderer, event_queue, clock, cell_size):
         self._level = level
@@ -15,9 +16,9 @@ class GameLoop:
 
     def start(self):
         while True:
-            if self._handle_events() == False:
+            if self._handle_events() is False:
                 break
-            
+
             if not self._failed:
                 self._handle_player_movement()
                 self._gravity()
@@ -41,20 +42,24 @@ class GameLoop:
         if self._level.player_fallen():
             self._failed = True
 
-    def _handle_player_movement(self):
-        keys = pygame.key.get_pressed()
+    def _set_sprintspeed(self, keys):
         if keys[pygame.K_LSHIFT] and not self._level.player.jumping:
             self._level.player.set_ms(600)
-    
+
         if self._level.player.sprint_jumping:
             self._level.player.set_ms(600)
+
+    def _handle_player_movement(self):
+        keys = pygame.key.get_pressed()
+        self._set_sprintspeed(keys)
 
         if keys[pygame.K_LEFT]:
             self._level.move_player(-self._level.player.move_speed * self.dt)
         if keys[pygame.K_RIGHT]:
             self._level.move_player(self._level.player.move_speed * self.dt)
         if keys[pygame.K_UP]:
-            self._level.move_player(0, -self._level.player.move_speed * self.dt)
+            self._level.move_player(
+                0, -self._level.player.move_speed * self.dt)
         if keys[pygame.K_DOWN]:
             self._level.move_player(0, self._level.player.move_speed * self.dt)
 
@@ -63,7 +68,7 @@ class GameLoop:
 
         if keys[pygame.K_SPACE]:
             self._level.player.jumping = True
-        
+
         if keys[pygame.K_SPACE] and keys[pygame.K_LSHIFT]:
             self._level.player.sprint_jumping = True
 
@@ -81,9 +86,12 @@ class GameLoop:
                     self._level.restart_level()
                     self._failed = False
                     self._success = False
-            elif event.type == pygame.QUIT:
+                    return None
+                return None
+            if event.type == pygame.QUIT:
                 return False
-            
+        return None
+
     def _render(self):
         self._renderer.render()
 
