@@ -76,8 +76,7 @@ class GameLoop:
             self._level.jump_player()
 
     def _gravity(self):
-        if not self._level.player.is_jumping():
-            self._level.move_player(0, 15)
+        self._level.gravity()
 
     def _handle_events(self):
         for event in self._event_queue.get():

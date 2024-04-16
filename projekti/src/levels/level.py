@@ -11,6 +11,7 @@ class Level:
         self.player = None
         self.platforms = pygame.sprite.Group()
         self.backgrounds = pygame.sprite.Group()
+        self.g = 5
 
         self.all_sprites = pygame.sprite.Group()
 
@@ -62,22 +63,46 @@ class Level:
 
         colliding_platforms = pygame.sprite.spritecollide(
             self.player, self.platforms, False)
+
         can_move = not colliding_platforms
 
         self.player.rect.move_ip(-x, -y)
         return can_move
 
+    def _get_colliding_platform(self, x=0, y=0):
+        self.player.rect.move_ip(x, y)
+
+        colliding_platform = pygame.sprite.spritecollide(
+            self.player, self.platforms, False)[0]
+        
+        return colliding_platform
+
     def jump_player(self):
         if self._player_can_move(0, -self.player.jump_velocity):
             self.player.rect.y -= self.player.jump_velocity
+        else:
+            colliding_platform = self._get_colliding_platform(
+                0, -self.player.jump_velocity)
+            if colliding_platform.rect.y < self.player.rect.y:
+                self.player.rect.top = colliding_platform.rect.bottom
+            else:
+                self.player.rect.bottom = colliding_platform.rect.top
 
         self.player.jump_velocity -= self.player.jump_gravity
 
         if self.player.jump_velocity < -self.player.jump_height:
-
             self.player.jumping = False
             self.player.sprint_jumping = False
             self.player.jump_velocity = self.player.jump_height
+
+    def gravity(self):
+        if self._player_can_move(0, self.g):
+            self.player.rect.y += self.g
+        else:
+            print("COLLISION")
+            colliding_platform = self._get_colliding_platform(
+                0, self.g)
+            self.player.rect.bottom = colliding_platform.rect.top
 
     def player_fallen(self):
         if self.player.rect.y > len(self.level_map) * self.cell_size:
