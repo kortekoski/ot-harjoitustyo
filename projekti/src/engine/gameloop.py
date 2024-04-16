@@ -9,6 +9,7 @@ class GameLoop:
         self._clock = clock
         self._cell_size = cell_size
 
+        # These could be moved to a class called "State" or something
         self._failed = False
         self._success = False
         self._coins = 0
@@ -56,15 +57,7 @@ class GameLoop:
         keys = pygame.key.get_pressed()
         self._set_sprintspeed(keys)
 
-        if keys[pygame.K_LEFT]:
-            self._level.move_player(-self._level.player.move_speed * self.dt)
-        if keys[pygame.K_RIGHT]:
-            self._level.move_player(self._level.player.move_speed * self.dt)
-        if keys[pygame.K_UP]:
-            self._level.move_player(
-                0, -self._level.player.move_speed * self.dt)
-        if keys[pygame.K_DOWN]:
-            self._level.move_player(0, self._level.player.move_speed * self.dt)
+        self._move_player(keys)
 
         if not self._level.player.sprint_jumping:
             self._level.player.set_ms(300)
@@ -80,6 +73,12 @@ class GameLoop:
 
         if self._level.fist:
             self._level.set_fist()
+
+    def _move_player(self, keys):
+        if keys[pygame.K_LEFT]:
+            self._level.move_player(-self._level.player.move_speed * self.dt)
+        if keys[pygame.K_RIGHT]:
+            self._level.move_player(self._level.player.move_speed * self.dt)
 
     def _gravity(self):
         self._level.gravity()
@@ -106,14 +105,15 @@ class GameLoop:
         return None
 
     def _render(self):
-        self._renderer.render(self._coins, self._stars, self._failed, self._success)
+        self._renderer.render(self._coins, self._stars,
+                              self._failed, self._success)
 
     def _handle_fist(self):
         self._level.handle_fist()
 
     def _collect(self):
         collected = self._level.collect()
-        
+
         if collected == "Coin":
             self._coins += 1
         elif collected == "Star":

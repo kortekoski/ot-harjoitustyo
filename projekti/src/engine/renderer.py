@@ -12,7 +12,7 @@ class Renderer:
 
         if failed:
             self._render_text("FAILED, press R to restart")
-        
+
         if success:
             self._render_text("SUCCESS!!")
 
@@ -33,4 +33,3 @@ class Renderer:
             text_rect.left = x
             text_rect.bottom = y
         self._display.blit(text, text_rect)
-        

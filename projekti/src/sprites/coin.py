@@ -3,6 +3,7 @@ import pygame
 
 dirname = os.path.dirname(__file__)
 
+
 class Coin(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()

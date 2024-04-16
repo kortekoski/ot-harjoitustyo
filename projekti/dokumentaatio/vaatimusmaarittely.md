@@ -13,7 +13,7 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 
 ### Pelinäkymä
 - Pelinäkymä aukeaa, kun kenttä on valittu.
-- Pelinäkymässä näkyy
+- Pelinäkymässä näkyy (TEHTY)
   - hahmo (hieman näkymän keskustasta vasemmalle)
   - tasot ja esteet
   - taustakuva.
@@ -21,21 +21,21 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 - Pelinäkymässä soi taustamusiikki.
 - Pelinäkymästä siirrytään takaisin päävalikkoon, kun hahmo pääsee kentän loppuun.
 
-### Pelaajan hahmo
+### Pelaajan hahmo (TEHTY)
 - Kävely: hahmo liikkuu x-akselilla, kun vasenta/oikeaa nuolta pidetään pohjassa.
 - Juoksu: hahmo liikkuu nopeammin x-akselilla, kun vaihtonäppäintä pidetään pohjassa samaan aikaan kun kävellään.
 - Hyppy: hahmo liikkuu y-akselilla ylöspäin välilyönnin painalluksesta, pohjassa pitäminen lisää korkeutta.
 - Lyönti: hahmo iskee esteen rikki z-näppäimen painalluksesta.
 
 ### Kenttä
-- Kenttä koostuu erinäisistä tasoista, joiden päällä hahmo voi liikkua tippumatta alas. Jos hahmo tippuu ruudun alalaitaan, kenttä on aloitettava alusta.
-- Kentässä on kahdenlaisia esteitä: toiset täytyy väistää hyppäämällä, toiset tuhota lyömällä.
+- Kenttä koostuu erinäisistä tasoista, joiden päällä hahmo voi liikkua tippumatta alas. Jos hahmo tippuu ruudun alalaitaan, kenttä on aloitettava alusta. (TEHTY)
+- Kentässä on kahdenlaisia esteitä: toiset täytyy väistää hyppäämällä, toiset tuhota lyömällä. (TEHTY)
 - Vasemmalta pelaajaa lähestyy koko ruudun korkuinen seinä, joka pakottaa pelaajan liikkeelle.
 - Joten kun pelaaja osuu ruudun alareunaan, esteesen tai seinään, hahmo räjähtää ja pelaaja on epäonnistunut kentän läpäisemisessä. Tällöin aukeaa valikko, josta voi valita, yrittääkö uudelleen (kenttä alkaa alusta) vai luovuttaako (siirrytään päävalikkoon).
 - Kun saavutaa kentän oikean reunan, se on läpäisty ja siirrytään päävalikkoon.
 - Tasot ja esteet on ajoitettu taustamusiikin mukaisesti siten, että jos pelaaja ajoittaa hypyt ja lyönnit oikein rytmiin, hän onnistuu läpäisemään kentän.
-- Kentässä on viisi kerättävää erikoisesinettä, jotka saa kun hahmo osuu niihin.
-- Kentässä on myös vähemmän erikoisia esineitä (esim. kolikoita), jotka saa kun hahmo osuu niihin.
+- Kentässä on viisi kerättävää erikoisesinettä, jotka saa kun hahmo osuu niihin. (TEHTY)
+- Kentässä on myös vähemmän erikoisia esineitä (esim. kolikoita), jotka saa kun hahmo osuu niihin. (TEHTY)
 
 ### Tallentaminen
 - Aluksi auki on vain kenttä 1. Seuraavat kentät aukeavat, kun edeltävät saa läpäistyä. 

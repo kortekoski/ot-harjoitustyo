@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
             return True
 
         return False
-    
+
     def reset_jumping(self):
         self.jumping = False
         self.sprint_jumping = False

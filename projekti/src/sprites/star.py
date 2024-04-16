@@ -3,6 +3,7 @@ import pygame
 
 dirname = os.path.dirname(__file__)
 
+
 class Star(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()

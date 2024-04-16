@@ -42,26 +42,7 @@ class Level:
                 normalized_x = x * self.cell_size
                 normalized_y = y * self.cell_size
 
-                if cell == 0:
-                    self.backgrounds.add(Background(
-                        (normalized_x, normalized_y)))
-                elif cell == 1:
-                    self.platforms.add(Platform((normalized_x, normalized_y)))
-                elif cell == 2:
-                    self.backgrounds.add(Background((normalized_x, normalized_y)))
-                    self.obstacles.add(Obstacle((normalized_x, normalized_y)))
-                elif cell == 4:
-                    self.player = Player((normalized_x, normalized_y))
-                    self.backgrounds.add(Background(
-                        (normalized_x, normalized_y)))
-                elif cell == 5:
-                    self.backgrounds.add(Background(
-                        (normalized_x, normalized_y)))
-                    self.coins.add(Coin((normalized_x, normalized_y)))
-                elif cell == 6:
-                    self.backgrounds.add(Background(
-                        (normalized_x, normalized_y)))
-                    self.stars.add(Star((normalized_x, normalized_y)))
+                self._add_sprite(cell, normalized_x, normalized_y)
 
         self.all_sprites.add(
             self.backgrounds,
@@ -71,6 +52,29 @@ class Level:
             self.stars,
             self.player
         )
+
+    def _add_sprite(self, cell, normalized_x, normalized_y):
+        if cell == 0:
+            self.backgrounds.add(Background(
+                (normalized_x, normalized_y)))
+        elif cell == 1:
+            self.platforms.add(Platform((normalized_x, normalized_y)))
+        elif cell == 2:
+            self.backgrounds.add(Background(
+                (normalized_x, normalized_y)))
+            self.obstacles.add(Obstacle((normalized_x, normalized_y)))
+        elif cell == 4:
+            self.player = Player((normalized_x, normalized_y))
+            self.backgrounds.add(Background(
+                (normalized_x, normalized_y)))
+        elif cell == 5:
+            self.backgrounds.add(Background(
+                (normalized_x, normalized_y)))
+            self.coins.add(Coin((normalized_x, normalized_y)))
+        elif cell == 6:
+            self.backgrounds.add(Background(
+                (normalized_x, normalized_y)))
+            self.stars.add(Star((normalized_x, normalized_y)))
 
     def restart_level(self):
         for sprite in self.all_sprites:
@@ -89,7 +93,7 @@ class Level:
 
         colliding_platforms = pygame.sprite.spritecollide(
             self.player, self.platforms, False)
-        
+
         colliding_obstacles = pygame.sprite.spritecollide(
             self.player, self.obstacles, False
         )
@@ -104,38 +108,41 @@ class Level:
 
         colliding_platform = pygame.sprite.spritecollide(
             self.player, self.platforms, False)
-        
+
         return colliding_platform
-    
+
     def _get_colliding_obstacles(self, x=0, y=0):
         self.player.rect.move_ip(x, y)
 
         colliding_obstacle = pygame.sprite.spritecollide(
             self.player, self.obstacles, False)
-        
+
         return colliding_obstacle
+
+    def _jump_with_collision(self):
+        colliding_obstacles = self._get_colliding_obstacles(
+            0, -self.player.jump_velocity)
+        colliding_platforms = self._get_colliding_platforms(
+            0, -self.player.jump_velocity)
+
+        if colliding_obstacles:
+            obstacle = colliding_obstacles[0]
+            if obstacle.rect.y < self.player.rect.y:
+                self.player.rect.top = obstacle.rect.bottom
+            else:
+                self.player.rect.bottom = obstacle.rect.top
+        else:
+            colliding_platform = colliding_platforms[0]
+            if colliding_platform.rect.y < self.player.rect.y:
+                self.player.rect.top = colliding_platform.rect.bottom
+            else:
+                self.player.rect.bottom = colliding_platform.rect.top
 
     def jump_player(self):
         if self._player_can_move(0, -self.player.jump_velocity):
             self.player.rect.y -= self.player.jump_velocity
         else:
-            colliding_obstacles = self._get_colliding_obstacles(
-                0, -self.player.jump_velocity)
-            colliding_platforms = self._get_colliding_platforms(
-                0, -self.player.jump_velocity)
-
-            if colliding_obstacles:
-                obstacle = colliding_obstacles[0]
-                if obstacle.rect.y < self.player.rect.y:
-                    self.player.rect.top = obstacle.rect.bottom
-                else:
-                    self.player.rect.bottom = obstacle.rect.top
-            else:
-                colliding_platform = colliding_platforms[0]
-                if colliding_platform.rect.y < self.player.rect.y:
-                    self.player.rect.top = colliding_platform.rect.bottom
-                else:
-                    self.player.rect.bottom = colliding_platform.rect.top
+            self._jump_with_collision()
 
         self.player.jump_velocity -= self.player.jump_gravity
 
@@ -152,7 +159,7 @@ class Level:
                 0, self.g)
             colliding_platforms = self._get_colliding_platforms(
                 0, self.g)
-            
+
             if colliding_obstacles:
                 obstacle = colliding_obstacles[0]
                 self.player.rect.bottom = obstacle.rect.top
@@ -171,18 +178,18 @@ class Level:
         if self.player.rect.x > len(self.level_map[0]) * self.cell_size:
             return True
         return False
-    
+
     def player_attack(self):
         x = self.player.rect.x + self.cell_size
         y = self.player.rect.y
         self.fist = Fist((x, y))
         self.all_sprites.add(self.fist)
-    
+
     def handle_fist(self):
         if self.fist:
             if self.fist.get_lifetime() > 0:
                 self.fist.tick()
-                
+
                 hit_obstacles = pygame.sprite.spritecollide(
                     self.fist, self.obstacles, False
                 )
@@ -197,7 +204,7 @@ class Level:
         self.fist.set_coordinates(
             self.player.rect.x + self.cell_size, self.player.rect.y
         )
-    
+
     def _collided_sprites(self, moving_object, static_objects):
         hit_objects = pygame.sprite.spritecollide(
             moving_object, static_objects, False
@@ -212,9 +219,9 @@ class Level:
         if coins:
             coins[0].kill()
             return "Coin"
-        
+
         if stars:
             stars[0].kill()
             return "Star"
-        
+
         return None
