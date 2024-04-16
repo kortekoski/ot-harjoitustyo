@@ -7,11 +7,11 @@ from engine.eventqueue import EventQueue
 from engine.gameloop import GameLoop
 from engine.renderer import Renderer
 
-LEVEL_MAP = [[0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 1, 1],
-             [0, 1, 4, 0, 0, 0],
-             [0, 1, 1, 1, 0, 0]]
+LEVEL_MAP = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 1, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0],
+             [0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]]
 
 CELL_SIZE = 50
 
