@@ -17,7 +17,7 @@ class Fist(pygame.sprite.Sprite):
         self.rect.x = position[0]
         self.rect.y = position[1]
 
-        self.lifetime = 10
+        self.lifetime = 9
 
     def tick(self):
         self.lifetime -= 1

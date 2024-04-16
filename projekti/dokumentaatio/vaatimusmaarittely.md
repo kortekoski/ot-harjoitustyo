@@ -24,8 +24,8 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 ### Pelaajan hahmo
 - Kävely: hahmo liikkuu x-akselilla, kun vasenta/oikeaa nuolta pidetään pohjassa.
 - Juoksu: hahmo liikkuu nopeammin x-akselilla, kun vaihtonäppäintä pidetään pohjassa samaan aikaan kun kävellään.
-- Hyppy: hahmo liikkuu y-akselilla ylöspäin ylänuolen painalluksesta, pohjassa pitäminen lisää korkeutta.
-- Lyönti: hahmo iskee esteen rikki välilyönnin painalluksesta.
+- Hyppy: hahmo liikkuu y-akselilla ylöspäin välilyönnin painalluksesta, pohjassa pitäminen lisää korkeutta.
+- Lyönti: hahmo iskee esteen rikki z-näppäimen painalluksesta.
 
 ### Kenttä
 - Kenttä koostuu erinäisistä tasoista, joiden päällä hahmo voi liikkua tippumatta alas. Jos hahmo tippuu ruudun alalaitaan, kenttä on aloitettava alusta.

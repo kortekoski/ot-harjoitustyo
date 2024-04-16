@@ -11,6 +11,8 @@ class GameLoop:
 
         self._failed = False
         self._success = False
+        self._coins = 0
+        self._stars = 0
 
         self.dt = 0
 
@@ -19,7 +21,7 @@ class GameLoop:
             if self._handle_events() is False:
                 break
 
-            if not self._failed:
+            if not self._failed and not self._success:
                 self._handle_player_movement()
                 self._gravity()
 
@@ -29,12 +31,11 @@ class GameLoop:
                 self._render()
 
                 self.dt = self._clock.tick(60) / 1000
-            elif self._success:
-                self._render_success()
             else:
-                self._render_fail()
+                self._render()
 
             self._handle_fist()
+            self._collect()
 
     def _check_success(self):
         if self._level.player_succeeded():
@@ -83,13 +84,18 @@ class GameLoop:
     def _gravity(self):
         self._level.gravity()
 
+    def _reset_values(self):
+        self._failed = False
+        self._success = False
+        self._coins = 0
+        self._stars = 0
+
     def _handle_events(self):
         for event in self._event_queue.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     self._level.restart_level()
-                    self._failed = False
-                    self._success = False
+                    self._reset_values()
                     return None
                 if event.key == pygame.K_z:
                     self._level.player_attack()
@@ -100,13 +106,15 @@ class GameLoop:
         return None
 
     def _render(self):
-        self._renderer.render()
-
-    def _render_fail(self):
-        self._renderer.render_text("FAILED, press R to restart")
-
-    def _render_success(self):
-        self._renderer.render_text("SUCCESS!!")
+        self._renderer.render(self._coins, self._stars, self._failed, self._success)
 
     def _handle_fist(self):
         self._level.handle_fist()
+
+    def _collect(self):
+        collected = self._level.collect()
+        
+        if collected == "Coin":
+            self._coins += 1
+        elif collected == "Star":
+            self._stars += 1

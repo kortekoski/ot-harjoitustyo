@@ -3,6 +3,8 @@ from sprites.player import Player
 from sprites.platform import Platform
 from sprites.obstacle import Obstacle
 from sprites.background import Background
+from sprites.coin import Coin
+from sprites.star import Star
 from sprites.fist import Fist
 
 
@@ -14,7 +16,10 @@ class Level:
         self.fist = None
         self.platforms = pygame.sprite.Group()
         self.obstacles = pygame.sprite.Group()
+        self.coins = pygame.sprite.Group()
+        self.stars = pygame.sprite.Group()
         self.backgrounds = pygame.sprite.Group()
+
         self.g = 5
 
         self.all_sprites = pygame.sprite.Group()
@@ -49,15 +54,28 @@ class Level:
                     self.player = Player((normalized_x, normalized_y))
                     self.backgrounds.add(Background(
                         (normalized_x, normalized_y)))
+                elif cell == 5:
+                    self.backgrounds.add(Background(
+                        (normalized_x, normalized_y)))
+                    self.coins.add(Coin((normalized_x, normalized_y)))
+                elif cell == 6:
+                    self.backgrounds.add(Background(
+                        (normalized_x, normalized_y)))
+                    self.stars.add(Star((normalized_x, normalized_y)))
 
         self.all_sprites.add(
             self.backgrounds,
             self.platforms,
             self.obstacles,
+            self.coins,
+            self.stars,
             self.player
         )
 
     def restart_level(self):
+        for sprite in self.all_sprites:
+            sprite.kill()
+
         self._initialize_sprites(self.level_map)
 
     def move_player(self, dx=0, dy=0):
@@ -179,3 +197,24 @@ class Level:
         self.fist.set_coordinates(
             self.player.rect.x + self.cell_size, self.player.rect.y
         )
+    
+    def _collided_sprites(self, moving_object, static_objects):
+        hit_objects = pygame.sprite.spritecollide(
+            moving_object, static_objects, False
+        )
+
+        return hit_objects
+
+    def collect(self):
+        coins = self._collided_sprites(self.player, self.coins)
+        stars = self._collided_sprites(self.player, self.stars)
+
+        if coins:
+            coins[0].kill()
+            return "Coin"
+        
+        if stars:
+            stars[0].kill()
+            return "Star"
+        
+        return None
