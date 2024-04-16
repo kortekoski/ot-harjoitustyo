@@ -8,7 +8,7 @@ class TestFist(unittest.TestCase):
 
     def test_fist_exist(self):
         self.assertEqual((50, 50), (self.fist.rect.x, self.fist.rect.y))
-    
+
     def test_fist_alive(self):
         self.assertEqual(9, self.fist.get_lifetime())
 

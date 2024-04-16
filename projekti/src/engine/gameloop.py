@@ -19,6 +19,12 @@ class GameLoop:
 
     def start(self):
         while True:
+            self._render_introscreen()
+
+            if self._check_start() is True:
+                break
+
+        while True:
             if self._handle_events() is False:
                 break
 
@@ -99,6 +105,8 @@ class GameLoop:
                 if event.key == pygame.K_z:
                     self._level.player_attack()
                     return None
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
                 return None
             if event.type == pygame.QUIT:
                 return False
@@ -107,6 +115,9 @@ class GameLoop:
     def _render(self):
         self._renderer.render(self._coins, self._stars,
                               self._failed, self._success)
+
+    def _render_introscreen(self):
+        self._renderer.render_introscreen()
 
     def _handle_fist(self):
         self._level.handle_fist()
@@ -118,3 +129,11 @@ class GameLoop:
             self._coins += 1
         elif collected == "Star":
             self._stars += 1
+
+    def _check_start(self):
+        for event in self._event_queue.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    return True
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
