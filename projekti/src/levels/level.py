@@ -160,10 +160,18 @@ class Level:
         self.fist = Fist((x, y))
         self.all_sprites.add(self.fist)
     
-    def tick_fist(self):
+    def handle_fist(self):
         if self.fist:
             if self.fist.get_lifetime() > 0:
                 self.fist.tick()
+                
+                hit_obstacles = pygame.sprite.spritecollide(
+                    self.fist, self.obstacles, False
+                )
+
+                if hit_obstacles:
+                    hitted = hit_obstacles[0]
+                    hitted.kill()
             else:
                 self.fist.kill()
 

@@ -109,4 +109,4 @@ class GameLoop:
         self._renderer.render_text("SUCCESS!!")
 
     def _handle_fist(self):
-        self._level.tick_fist()
+        self._level.handle_fist()
