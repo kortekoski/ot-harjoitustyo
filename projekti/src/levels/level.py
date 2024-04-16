@@ -3,6 +3,7 @@ from sprites.player import Player
 from sprites.platform import Platform
 from sprites.obstacle import Obstacle
 from sprites.background import Background
+from sprites.fist import Fist
 
 
 class Level:
@@ -10,6 +11,7 @@ class Level:
         self.cell_size = cell_size
         self.level_map = level_map
         self.player = None
+        self.fist = None
         self.platforms = pygame.sprite.Group()
         self.obstacles = pygame.sprite.Group()
         self.backgrounds = pygame.sprite.Group()
@@ -152,3 +154,20 @@ class Level:
             return True
         return False
     
+    def player_attack(self):
+        x = self.player.rect.x + self.cell_size
+        y = self.player.rect.y
+        self.fist = Fist((x, y))
+        self.all_sprites.add(self.fist)
+    
+    def tick_fist(self):
+        if self.fist:
+            if self.fist.get_lifetime() > 0:
+                self.fist.tick()
+            else:
+                self.fist.kill()
+
+    def set_fist(self):
+        self.fist.set_coordinates(
+            self.player.rect.x + self.cell_size, self.player.rect.y
+        )

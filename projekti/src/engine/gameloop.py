@@ -34,6 +34,8 @@ class GameLoop:
             else:
                 self._render_fail()
 
+            self._handle_fist()
+
     def _check_success(self):
         if self._level.player_succeeded():
             self._success = True
@@ -75,6 +77,9 @@ class GameLoop:
         if self._level.player.jumping:
             self._level.jump_player()
 
+        if self._level.fist:
+            self._level.set_fist()
+
     def _gravity(self):
         self._level.gravity()
 
@@ -85,6 +90,9 @@ class GameLoop:
                     self._level.restart_level()
                     self._failed = False
                     self._success = False
+                    return None
+                if event.key == pygame.K_z:
+                    self._level.player_attack()
                     return None
                 return None
             if event.type == pygame.QUIT:
@@ -99,3 +107,6 @@ class GameLoop:
 
     def _render_success(self):
         self._renderer.render_text("SUCCESS!!")
+
+    def _handle_fist(self):
+        self._level.tick_fist()
