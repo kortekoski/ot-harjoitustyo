@@ -1,6 +1,6 @@
 # Ohjelmistotekniikan harjoitustyö: OT-Peli
 
-Sovelluksen visio on tasohyppelypeli, jossa liikutaan musiikin rytmissä. Toistaiseksi sovellus on kuitenkin vain pieni ruutu, jossa keltainen neliö voi hyppiä mustien neliöiden päällä. Keltaiselle neliölle on piirretty veikeä naama.
+Sovelluksen visio on tasohyppelypeli, jossa liikutaan musiikin rytmissä. Pelinäkymän toiminta on jo tyydyttävällä tasolla, peruspalikat ovat paikoillaan. Pelinäkymän liikkuva ruutu, valikkonäkymä ja pelitietojen tallentaminen ovat seuraavia ongelmia.
 
 ## Dokumentaatio
 

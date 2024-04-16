@@ -9,4 +9,5 @@
 | 9.4.  | 2    | ensimmäiset testit, coverage, invoke |
 | 9.4.  | 5    | moduulien rakenteen uudelleenjärjestely, pelaajan hyppy, spritejen läpimenon estäminen y-tasolla |
 | 16.4.  | 1    | linttaus |
-| yht   | 14    | |
+| 16.4.  | 5    | liikkumisen parannus, uudet spritet (nyrkki, kolikko, tähti, este), lisää testejä, selvittelyä kun uusien ominaisuuksien lisääminen johtaa vanhojen räjähtämiseen |
+| yht   | 19    | |
