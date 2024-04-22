@@ -1,5 +1,7 @@
+import os
 import pygame
 
+dirname = os.path.dirname(__file__)
 
 class GameLoop:
     def __init__(self, level, renderer, event_queue, clock, cell_size):
@@ -24,6 +26,9 @@ class GameLoop:
 
             self._render_introscreen()
             self._clock.tick(60)
+
+        pygame.mixer.music.load(os.path.join(dirname, "..", "assets", "test_track.mp3"))
+        pygame.mixer.music.play(-1)
 
         while True:
             if self._handle_events() is False:
@@ -101,6 +106,7 @@ class GameLoop:
                 if event.key == pygame.K_r:
                     self._level.restart_level()
                     self._reset_values()
+                    pygame.mixer.music.play(-1)
                     return None
                 if event.key == pygame.K_z:
                     self._level.player_attack()

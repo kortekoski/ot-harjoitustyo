@@ -21,6 +21,7 @@ class Level:
         self.coins = pygame.sprite.Group()
         self.stars = pygame.sprite.Group()
         self.backgrounds = pygame.sprite.Group()
+        self.goal = pygame.sprite.Group()
         self.fire = pygame.sprite.Group()
 
         self.g = 5
@@ -55,6 +56,7 @@ class Level:
             self.coins,
             self.stars,
             self.fire,
+            self.goal,
             self.player
         )
 
@@ -62,7 +64,8 @@ class Level:
             self.platforms,
             self.obstacles,
             self.coins,
-            self.stars
+            self.stars,
+            self.goal
         )
 
     def _add_sprite(self, cell, normalized_x, normalized_y):
@@ -78,6 +81,8 @@ class Level:
             self.coins.add(Coin((normalized_x, normalized_y)))
         elif cell == 6:
             self.stars.add(Star((normalized_x, normalized_y)))
+        elif cell == 8:
+            self.goal.add(Background((normalized_x, normalized_y)))
         elif cell== 9:
             self.fire.add(Fire((normalized_x, normalized_y)))
 
@@ -203,7 +208,7 @@ class Level:
         return False
 
     def player_succeeded(self):
-        if self.player.rect.x > len(self.level_map[0]) * self.cell_size:
+        if pygame.sprite.spritecollide(self.player, self.goal, False):
             return True
         return False
 
