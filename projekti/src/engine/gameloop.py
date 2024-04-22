@@ -19,19 +19,21 @@ class GameLoop:
 
     def start(self):
         while True:
-            self._render_introscreen()
-
-            if self._check_start() is True:
+            if self._check_start():
                 break
+
+            self._render_introscreen()
+            self._clock.tick(60)
 
         while True:
             if self._handle_events() is False:
                 break
 
             if not self._failed and not self._success:
-                self._handle_player_movement()
                 self._gravity()
-
+                self._handle_player_movement()
+                self._scroll_level()
+                
                 self._check_success()
                 self._check_fail()
 
@@ -40,6 +42,7 @@ class GameLoop:
                 self.dt = self._clock.tick(60) / 1000
             else:
                 self._render()
+                self._clock.tick(60)
 
             self._handle_fist()
             self._collect()
@@ -49,7 +52,7 @@ class GameLoop:
             self._success = True
 
     def _check_fail(self):
-        if self._level.player_fallen():
+        if self._level.player_dead():
             self._failed = True
 
     def _set_sprintspeed(self, keys):
@@ -63,7 +66,7 @@ class GameLoop:
         keys = pygame.key.get_pressed()
         self._set_sprintspeed(keys)
 
-        self._move_player(keys)
+        self._level.player_movement(keys, self.dt)
 
         if not self._level.player.sprint_jumping:
             self._level.player.set_ms(300)
@@ -80,11 +83,8 @@ class GameLoop:
         if self._level.fist:
             self._level.set_fist()
 
-    def _move_player(self, keys):
-        if keys[pygame.K_LEFT]:
-            self._level.move_player(-self._level.player.move_speed * self.dt)
-        if keys[pygame.K_RIGHT]:
-            self._level.move_player(self._level.player.move_speed * self.dt)
+    def _scroll_level(self):
+        self._level.scroll_level(self.dt)
 
     def _gravity(self):
         self._level.gravity()
@@ -113,8 +113,7 @@ class GameLoop:
         return None
 
     def _render(self):
-        self._renderer.render(self._coins, self._stars,
-                              self._failed, self._success)
+        self._renderer.render(self._coins, self._stars, self._failed, self._success)
 
     def _render_introscreen(self):
         self._renderer.render_introscreen()
@@ -137,3 +136,4 @@ class GameLoop:
                     return True
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
+                    exit()

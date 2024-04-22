@@ -2,9 +2,11 @@ import pygame
 
 
 class Renderer:
-    def __init__(self, display, level):
+    def __init__(self, display, level, center):
         self._display = display
         self._level = level
+        self._center_x = center[0]
+        self._center_y = center[1]
 
     def render(self, coins, stars, failed, success):
         self._level.all_sprites.draw(self._display)
@@ -20,7 +22,7 @@ class Renderer:
 
     def render_introscreen(self):
         self._render_text("GAME", 100)
-        self._render_text("Press ENTER to start or ESC to quit", 50, 220, 220)
+        self._render_text("Press ENTER to start or ESC to quit", 32, self._center_x, self._center_y + 50)
         pygame.display.update()
 
     def _render_info_texts(self, coins, stars):
@@ -33,8 +35,7 @@ class Renderer:
         text_rect = text.get_rect()
 
         if x == 0 and y == 0:
-            text_rect.center = self._level.get_center()
+            text_rect.center = (self._center_x, self._center_y)
         else:
-            text_rect.left = x
-            text_rect.bottom = y
+            text_rect.center = (x, y)
         self._display.blit(text, text_rect)
