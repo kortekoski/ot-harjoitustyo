@@ -1,4 +1,5 @@
 import os
+import sys
 import pygame
 
 from levels.level import Level
@@ -40,11 +41,12 @@ class GameLoop:
             while True:
                 if self._handle_menu_events():
                     break
-                
+
                 self._render_menu(self._chosen_level)
                 self.dt = self._clock.tick(60)
 
-            self._level = Level(self._level_maps[self._chosen_level], self._cell_size, self._scroll_threshold)
+            self._level = Level(
+                self._level_maps[self._chosen_level], self._cell_size, self._scroll_threshold)
             self._renderer.set_level(self._level)
 
             pygame.mixer.music.load(os.path.join(
@@ -54,9 +56,10 @@ class GameLoop:
             while True:
                 events = self._handle_events()
 
-                if events == False:
+                if events is False:
                     break
-                elif events == True and self._success == True:
+
+                if events is True and self._success is True:
                     pygame.mixer.music.stop()
                     self._level.nuke()
                     self._level = None
@@ -128,7 +131,7 @@ class GameLoop:
                     return True
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-                    exit()
+                    sys.exit()
 
     def _handle_events(self):
         for event in self._event_queue.get():
@@ -178,4 +181,4 @@ class GameLoop:
                     return True
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-                    exit()
+                    sys.exit()

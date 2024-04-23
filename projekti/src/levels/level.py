@@ -10,6 +10,7 @@ from sprites.fire import Fire
 
 BPM = 130
 
+
 class Level:
     def __init__(self, level_map, cell_size, screen_scroll_threshold):
         self.cell_size = cell_size

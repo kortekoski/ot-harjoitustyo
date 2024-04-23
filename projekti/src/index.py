@@ -30,7 +30,6 @@ def main():
     pygame.mixer.music.set_volume(0.4)
 
     height = len(LEVEL_MAP_2)
-    width = len(LEVEL_MAP_2[0])
     screen_height = height * CELL_SIZE
     screen_width = 10 * CELL_SIZE
     screen_scroll_threshold = screen_width / 2
@@ -42,7 +41,8 @@ def main():
     event_queue = EventQueue()
     renderer = Renderer(screen, screen_center)
     clock = Clock()
-    game_loop = GameLoop(level_maps, renderer, event_queue, clock, CELL_SIZE, screen_scroll_threshold)
+    game_loop = GameLoop(level_maps, renderer, event_queue,
+                         clock, CELL_SIZE, screen_scroll_threshold)
 
     game_loop.start()
 

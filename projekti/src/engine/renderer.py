@@ -20,7 +20,8 @@ class Renderer:
 
         if success:
             self._render_text("SUCCESS!!")
-            self._render_text("Press ENTER to return to menu", 25, self._center_x, self._center_y+20)
+            self._render_text("Press ENTER to return to menu",
+                              25, self._center_x, self._center_y+20)
 
         pygame.display.update()
 
