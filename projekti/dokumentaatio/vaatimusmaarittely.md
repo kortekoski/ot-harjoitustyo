@@ -7,8 +7,9 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 ## Perusversion suunnitellut toiminnallisuudet
 
 ### Perusnäkymä (päävalikko)
-- Perusnäkymä aukeaa, kun sovelluksen avaa.
-- Perusnäkymästä voi valita ensin tallennuspaikan ja sitten kentän.
+- Perusnäkymä aukeaa, kun sovelluksen avaa. (TEHTY)
+- Perusnäkymästä voi valita kentän. (TEHTY)
+- Perusnäkymästä voi valita tallennuspaikan.
 - Kentän kohdalla näkyy nimi ja esittelykuva. Jos kenttä on jo läpäisty, näkyvät myös kerätyt esineet.
 
 ### Pelinäkymä
@@ -17,20 +18,19 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
   - hahmo (hieman näkymän keskustasta vasemmalle)
   - tasot ja esteet
   - taustakuva.
-- Pelinäkymässä ruutu liikkuu hahmon mukana.
-- Pelinäkymässä soi taustamusiikki.
+- Pelinäkymässä ruutu liikkuu hahmon mukana. (TEHTY)
+- Pelinäkymässä soi taustamusiikki. (TEHTY)
 - Pelinäkymästä siirrytään takaisin päävalikkoon, kun hahmo pääsee kentän loppuun.
 
 ### Pelaajan hahmo (TEHTY)
-- Kävely: hahmo liikkuu x-akselilla, kun vasenta/oikeaa nuolta pidetään pohjassa.
-- Juoksu: hahmo liikkuu nopeammin x-akselilla, kun vaihtonäppäintä pidetään pohjassa samaan aikaan kun kävellään.
+- Kävely: hahmo liikkuu x-akselilla itsestään.
 - Hyppy: hahmo liikkuu y-akselilla ylöspäin välilyönnin painalluksesta, pohjassa pitäminen lisää korkeutta.
 - Lyönti: hahmo iskee esteen rikki z-näppäimen painalluksesta.
 
 ### Kenttä
 - Kenttä koostuu erinäisistä tasoista, joiden päällä hahmo voi liikkua tippumatta alas. Jos hahmo tippuu ruudun alalaitaan, kenttä on aloitettava alusta. (TEHTY)
 - Kentässä on kahdenlaisia esteitä: toiset täytyy väistää hyppäämällä, toiset tuhota lyömällä. (TEHTY)
-- Vasemmalta pelaajaa lähestyy koko ruudun korkuinen seinä, joka pakottaa pelaajan liikkeelle.
+- Ruutu liikkuu automaattisesti eteenpäin. (TEHTY)
 - Joten kun pelaaja osuu ruudun alareunaan, esteesen tai seinään, hahmo räjähtää ja pelaaja on epäonnistunut kentän läpäisemisessä. Tällöin aukeaa valikko, josta voi valita, yrittääkö uudelleen (kenttä alkaa alusta) vai luovuttaako (siirrytään päävalikkoon).
 - Kun saavutaa kentän oikean reunan, se on läpäisty ja siirrytään päävalikkoon.
 - Tasot ja esteet on ajoitettu taustamusiikin mukaisesti siten, että jos pelaaja ajoittaa hypyt ja lyönnit oikein rytmiin, hän onnistuu läpäisemään kentän.

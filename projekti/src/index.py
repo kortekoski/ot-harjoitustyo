@@ -1,16 +1,14 @@
 import pygame
 
-from levels.level import Level
-
 from engine.clock import Clock
 from engine.eventqueue import EventQueue
 from engine.gameloop import GameLoop
 from engine.renderer import Renderer
 
-LEVEL_MAP = [[0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0],
-             [0, 1, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0],
+LEVEL_MAP = [[0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+             [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 8],
+             [0, 1, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 8],
              [0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]]
 
 LEVEL_MAP_2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
@@ -20,14 +18,16 @@ LEVEL_MAP_2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
                [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
-               [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1]]
+               [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1]]
 
+level_maps = [LEVEL_MAP, LEVEL_MAP_2]
 CELL_SIZE = 50
 
 
 def main():
     pygame.init()
     pygame.mixer.init()
+    pygame.mixer.music.set_volume(0.4)
 
     height = len(LEVEL_MAP_2)
     width = len(LEVEL_MAP_2[0])
@@ -39,11 +39,10 @@ def main():
 
     pygame.display.set_caption("Game")
 
-    level = Level(LEVEL_MAP_2, CELL_SIZE, screen_scroll_threshold)
     event_queue = EventQueue()
-    renderer = Renderer(screen, level, screen_center)
+    renderer = Renderer(screen, screen_center)
     clock = Clock()
-    game_loop = GameLoop(level, renderer, event_queue, clock, CELL_SIZE)
+    game_loop = GameLoop(level_maps, renderer, event_queue, clock, CELL_SIZE, screen_scroll_threshold)
 
     game_loop.start()
 

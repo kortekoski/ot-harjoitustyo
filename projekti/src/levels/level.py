@@ -8,6 +8,8 @@ from sprites.star import Star
 from sprites.fist import Fist
 from sprites.fire import Fire
 
+BPM = 130
+
 class Level:
     def __init__(self, level_map, cell_size, screen_scroll_threshold):
         self.cell_size = cell_size
@@ -24,7 +26,7 @@ class Level:
         self.fire = pygame.sprite.Group()
 
         self.g = 5
-        self.speed = ((130 / 60) * cell_size) / 60 * 2
+        self.speed = (cell_size / (60000 / BPM)) * 2
 
         self.all_sprites = pygame.sprite.Group()
         self.np_sprites = pygame.sprite.Group()
@@ -79,7 +81,7 @@ class Level:
         elif cell == 2:
             self.obstacles.add(Obstacle((normalized_x, normalized_y)))
         elif cell == 4:
-            self.player = Player((self.scroll_threshold, normalized_y+10))
+            self.player = Player((self.scroll_threshold-25, normalized_y))
         elif cell == 5:
             self.coins.add(Coin((normalized_x, normalized_y)))
         elif cell == 6:
@@ -120,8 +122,7 @@ class Level:
         return can_move
 
     def player_movement(self):
-        if self.player.rect.right < self.scroll_threshold:
-            self.move_player(self.speed * 1.2)
+        pass
 
     def _get_colliding_platforms(self, x=0, y=0):
         self.player.rect.move_ip(x, y)
@@ -249,12 +250,16 @@ class Level:
 
         return None
 
-    def scroll_level(self):
+    def scroll_level(self, delta_time):
         # The scrolling happens by moving sprites, not the display.
         # It remains to be seen if this is a smart way to do this.
 
         for sprite in self.np_sprites:
-            self.move_sprite(sprite, (-self.speed))
+            self.move_sprite(sprite, (-self.speed * delta_time))
 
         if not self._player_can_move(1):
-            self.move_player(-self.speed)
+            self.move_player(-self.speed * delta_time)
+
+    def nuke(self):
+        for sprite in self.all_sprites:
+            sprite.kill()
