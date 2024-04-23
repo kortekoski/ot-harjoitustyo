@@ -1,6 +1,8 @@
 # Ohjelmistotekniikan harjoitustyö: OT-Peli
 
-Sovelluksen visio on tasohyppelypeli, jossa liikutaan musiikin rytmissä. Pelinäkymän toiminta on jo tyydyttävällä tasolla, peruspalikat ovat paikoillaan. Pelinäkymän liikkuva ruutu, valikkonäkymä ja pelitietojen tallentaminen ovat seuraavia ongelmia.
+Sovelluksen visio on tasohyppelypeli, jossa liikutaan musiikin rytmissä. Pelinäkymän toiminta on jo tyydyttävällä tasolla, peruspalikat ovat paikoillaan.
+
+[Linkki ensimmäiseen julkaisuun](https://github.com/kortekoski/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Dokumentaatio
 
