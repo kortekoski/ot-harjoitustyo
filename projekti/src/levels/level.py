@@ -8,7 +8,6 @@ from sprites.star import Star
 from sprites.fist import Fist
 from sprites.fire import Fire
 
-
 class Level:
     def __init__(self, level_map, cell_size, screen_scroll_threshold):
         self.cell_size = cell_size
@@ -25,6 +24,7 @@ class Level:
         self.fire = pygame.sprite.Group()
 
         self.g = 5
+        self.speed = ((130 / 60) * cell_size) / 60 * 2
 
         self.all_sprites = pygame.sprite.Group()
         self.np_sprites = pygame.sprite.Group()
@@ -36,6 +36,9 @@ class Level:
         normalized_y = len(self.level_map) * self.cell_size
 
         return (normalized_x / 2, normalized_y / 2)
+
+    def set_speed(self, new_speed):
+        self.speed = new_speed
 
     def _initialize_sprites(self, level_map):
         height = len(level_map)
@@ -70,20 +73,20 @@ class Level:
 
     def _add_sprite(self, cell, normalized_x, normalized_y):
         self.backgrounds.add(Background((normalized_x, normalized_y)))
-        
+
         if cell == 1:
             self.platforms.add(Platform((normalized_x, normalized_y)))
         elif cell == 2:
             self.obstacles.add(Obstacle((normalized_x, normalized_y)))
         elif cell == 4:
-            self.player = Player((self.scroll_threshold, normalized_y))
+            self.player = Player((self.scroll_threshold, normalized_y+10))
         elif cell == 5:
             self.coins.add(Coin((normalized_x, normalized_y)))
         elif cell == 6:
             self.stars.add(Star((normalized_x, normalized_y)))
         elif cell == 8:
             self.goal.add(Background((normalized_x, normalized_y)))
-        elif cell== 9:
+        elif cell == 9:
             self.fire.add(Fire((normalized_x, normalized_y)))
 
     def restart_level(self):
@@ -115,22 +118,10 @@ class Level:
 
         self.player.rect.move_ip(-x, -y)
         return can_move
-    
-    def player_movement(self, keys, delta_time):
-        # Features for moving the character manually are commented out.
 
-        # if keys[pygame.K_LEFT]:
-        #     self.move_player(-self.player.move_speed * delta_time)
-        #     print(-self.player.move_speed * delta_time)
-        # if keys[pygame.K_RIGHT]:
-        #     if self.player.rect.right >= self.scroll_threshold:
-        #         self.scroll_level(delta_time)
-        #     else:
-        #         self.move_player(self.player.move_speed * delta_time)
-        
+    def player_movement(self):
         if self.player.rect.right < self.scroll_threshold:
-            self.move_player(self.player.move_speed * delta_time * 1.1)
-        
+            self.move_player(self.speed * 1.2)
 
     def _get_colliding_platforms(self, x=0, y=0):
         self.player.rect.move_ip(x, y)
@@ -177,7 +168,6 @@ class Level:
 
         if self.player.jump_velocity < -self.player.jump_height:
             self.player.jumping = False
-            self.player.sprint_jumping = False
             self.player.jump_velocity = self.player.jump_height
 
     def gravity(self):
@@ -201,10 +191,10 @@ class Level:
     def player_dead(self):
         if self.player.rect.y > len(self.level_map) * self.cell_size:
             return True
-        
+
         if self.player.rect.x < 0:
             return True
-        
+
         return False
 
     def player_succeeded(self):
@@ -259,12 +249,12 @@ class Level:
 
         return None
 
-    def scroll_level(self, delta_time):
-        # The scrolling happens by moving sprites, not the display. 
+    def scroll_level(self):
+        # The scrolling happens by moving sprites, not the display.
         # It remains to be seen if this is a smart way to do this.
-    
+
         for sprite in self.np_sprites:
-            self.move_sprite(sprite, (-self.player.move_speed * delta_time))
+            self.move_sprite(sprite, (-self.speed))
 
         if not self._player_can_move(1):
-            self.move_player(-self.player.move_speed * delta_time)
+            self.move_player(-self.speed)

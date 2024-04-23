@@ -22,7 +22,8 @@ class Renderer:
 
     def render_introscreen(self):
         self._render_text("GAME", 100)
-        self._render_text("Press ENTER to start or ESC to quit", 32, self._center_x, self._center_y + 50)
+        self._render_text("Press ENTER to start or ESC to quit",
+                          32, self._center_x, self._center_y + 50)
         pygame.display.update()
 
     def _render_info_texts(self, coins, stars):

@@ -3,6 +3,7 @@ import pygame
 
 dirname = os.path.dirname(__file__)
 
+
 class GameLoop:
     def __init__(self, level, renderer, event_queue, clock, cell_size):
         self._level = level
@@ -17,8 +18,6 @@ class GameLoop:
         self._coins = 0
         self._stars = 0
 
-        self.dt = 0
-
     def start(self):
         while True:
             if self._check_start():
@@ -27,7 +26,8 @@ class GameLoop:
             self._render_introscreen()
             self._clock.tick(60)
 
-        pygame.mixer.music.load(os.path.join(dirname, "..", "assets", "test_track.mp3"))
+        pygame.mixer.music.load(os.path.join(
+            dirname, "..", "assets", "test_track.mp3"))
         pygame.mixer.music.play(-1)
 
         while True:
@@ -38,13 +38,13 @@ class GameLoop:
                 self._gravity()
                 self._handle_player_movement()
                 self._scroll_level()
-                
+
                 self._check_success()
                 self._check_fail()
 
                 self._render()
 
-                self.dt = self._clock.tick(60) / 1000
+                self._clock.tick(60)
             else:
                 self._render()
                 self._clock.tick(60)
@@ -60,27 +60,13 @@ class GameLoop:
         if self._level.player_dead():
             self._failed = True
 
-    def _set_sprintspeed(self, keys):
-        if keys[pygame.K_LSHIFT] and not self._level.player.jumping:
-            self._level.player.set_ms(600)
-
-        if self._level.player.sprint_jumping:
-            self._level.player.set_ms(600)
-
     def _handle_player_movement(self):
         keys = pygame.key.get_pressed()
-        self._set_sprintspeed(keys)
 
-        self._level.player_movement(keys, self.dt)
-
-        if not self._level.player.sprint_jumping:
-            self._level.player.set_ms(300)
+        self._level.player_movement()
 
         if keys[pygame.K_SPACE]:
             self._level.player.jumping = True
-
-        if keys[pygame.K_SPACE] and keys[pygame.K_LSHIFT]:
-            self._level.player.sprint_jumping = True
 
         if self._level.player.jumping:
             self._level.jump_player()
@@ -89,7 +75,7 @@ class GameLoop:
             self._level.set_fist()
 
     def _scroll_level(self):
-        self._level.scroll_level(self.dt)
+        self._level.scroll_level()
 
     def _gravity(self):
         self._level.gravity()
@@ -119,7 +105,8 @@ class GameLoop:
         return None
 
     def _render(self):
-        self._renderer.render(self._coins, self._stars, self._failed, self._success)
+        self._renderer.render(self._coins, self._stars,
+                              self._failed, self._success)
 
     def _render_introscreen(self):
         self._renderer.render_introscreen()

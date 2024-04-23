@@ -9,7 +9,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         self.image = pygame.image.load(
-            os.path.join(dirname, "..", "assets", "dude.png")
+            os.path.join(dirname, "..", "assets", "small_dude.png")
         )
 
         self.rect = self.image.get_rect()
@@ -17,28 +17,21 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = position[0]
         self.rect.y = position[1]
 
-        self.move_speed = 300
-
         self.jumping = False
-        self.sprint_jumping = False
-        self.jump_height = 10
+        self.jump_height = 15
         self.jump_velocity = self.jump_height
         self.jump_gravity = 1
-
-    def set_ms(self, x):
-        self.move_speed = x
 
     def get_position(self):
         return (self.rect.x, self.rect.y)
 
     def is_jumping(self):
-        if self.jumping or self.sprint_jumping:
+        if self.jumping:
             return True
 
         return False
 
     def reset_jumping(self):
         self.jumping = False
-        self.sprint_jumping = False
-        self.jump_height = 20
+        self.jump_height = 15
         self.jump_velocity = self.jump_height
