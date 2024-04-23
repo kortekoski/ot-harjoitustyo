@@ -10,4 +10,6 @@
 | 9.4.  | 5    | moduulien rakenteen uudelleenjärjestely, pelaajan hyppy, spritejen läpimenon estäminen y-tasolla |
 | 16.4.  | 1    | linttaus |
 | 16.4.  | 5    | liikkumisen parannus, uudet spritet (nyrkki, kolikko, tähti, este), lisää testejä, selvittelyä kun uusien ominaisuuksien lisääminen johtaa vanhojen räjähtämiseen |
-| yht   | 19    | |
+| 22.4.  | 4    | ruudun liike |
+| 23.4.  | 5    | ruudun liike, päävalikko, hahmon liikkeen muutos, testikattavuuden lisäys |
+| yht   | 28    | |

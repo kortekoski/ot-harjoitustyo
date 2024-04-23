@@ -12,10 +12,9 @@ BPM = 130
 
 
 class Level:
-    def __init__(self, level_map, cell_size, screen_scroll_threshold):
+    def __init__(self, level_map, cell_size):
         self.cell_size = cell_size
         self.level_map = level_map
-        self.scroll_threshold = screen_scroll_threshold
         self.player = None
         self.fist = None
         self.platforms = pygame.sprite.Group()
@@ -82,7 +81,7 @@ class Level:
         elif cell == 2:
             self.obstacles.add(Obstacle((normalized_x, normalized_y)))
         elif cell == 4:
-            self.player = Player((self.scroll_threshold-25, normalized_y))
+            self.player = Player((normalized_x, normalized_y))
         elif cell == 5:
             self.coins.add(Coin((normalized_x, normalized_y)))
         elif cell == 6:

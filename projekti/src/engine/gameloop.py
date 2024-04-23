@@ -8,14 +8,13 @@ dirname = os.path.dirname(__file__)
 
 
 class GameLoop:
-    def __init__(self, level_maps, renderer, event_queue, clock, cell_size, scroll_threshold):
+    def __init__(self, level_maps, renderer, event_queue, clock, cell_size):
         self._level_maps = level_maps
         self._level = None
         self._renderer = renderer
         self._event_queue = event_queue
         self._clock = clock
         self._cell_size = cell_size
-        self._scroll_threshold = scroll_threshold
 
         # These could be moved to a class called "State" or something
         self._failed = False
@@ -46,7 +45,7 @@ class GameLoop:
                 self.dt = self._clock.tick(60)
 
             self._level = Level(
-                self._level_maps[self._chosen_level], self._cell_size, self._scroll_threshold)
+                self._level_maps[self._chosen_level], self._cell_size)
             self._renderer.set_level(self._level)
 
             pygame.mixer.music.load(os.path.join(
@@ -118,20 +117,26 @@ class GameLoop:
         self._coins = 0
         self._stars = 0
 
+    def _handle_menu_events_arrows(self, event):
+        if event.key == pygame.K_LEFT:
+            if self._chosen_level > 0:
+                self._chosen_level -= 1
+
+        if event.key == pygame.K_RIGHT:
+            if self._chosen_level < 10:
+                self._chosen_level += 1
+
     def _handle_menu_events(self):
         for event in self._event_queue.get():
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    if self._chosen_level > 0:
-                        self._chosen_level -= 1
-                if event.key == pygame.K_RIGHT:
-                    if self._chosen_level < 10:
-                        self._chosen_level += 1
+                self._handle_menu_events_arrows(event)
                 if event.key == pygame.K_RETURN:
                     return True
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+            return None
+        return None
 
     def _handle_events(self):
         for event in self._event_queue.get():
@@ -182,3 +187,5 @@ class GameLoop:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+                return None
+        return None

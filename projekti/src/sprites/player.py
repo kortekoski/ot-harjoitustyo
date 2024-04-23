@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = position[1]
 
         self.jumping = False
-        self.jump_height = 15
+        self.jump_height = 16
         self.jump_velocity = self.jump_height
         self.jump_gravity = 1
 
@@ -33,5 +33,5 @@ class Player(pygame.sprite.Sprite):
 
     def reset_jumping(self):
         self.jumping = False
-        self.jump_height = 15
+        self.jump_height = 16
         self.jump_velocity = self.jump_height

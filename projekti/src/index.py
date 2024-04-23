@@ -32,7 +32,6 @@ def main():
     height = len(LEVEL_MAP_2)
     screen_height = height * CELL_SIZE
     screen_width = 10 * CELL_SIZE
-    screen_scroll_threshold = screen_width / 2
     screen_center = (screen_width / 2, screen_height / 2)
     screen = pygame.display.set_mode((screen_width, screen_height))
 
@@ -42,7 +41,7 @@ def main():
     renderer = Renderer(screen, screen_center)
     clock = Clock()
     game_loop = GameLoop(level_maps, renderer, event_queue,
-                         clock, CELL_SIZE, screen_scroll_threshold)
+                         clock, CELL_SIZE)
 
     game_loop.start()
 

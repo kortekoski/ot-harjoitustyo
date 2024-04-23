@@ -19,3 +19,13 @@
 - Ruudussa näkyvät teksteinä kerätyt kolikot ja tähdet. Samalla renderöijää on uudelleenjärjestetty siten, että ruudulle voi piirtää useita tekstejä.
 - Hahmo lyö z-näppäimellä, eli nyrkki ilmestyy hetkeksi hahmon eteen. Jos nyrkki osuu esteeseen, este katoaa.
 - Testattu hahmon ja nyrkin ominaisuuksia.
+
+## Viikko 5
+
+- Lisätty toinen testikenttä.
+- Ruutu "liikkuu" nyt automaattisesti säädetyllä nopeudella. Käytännössä pelaajahahmo pysyy paikoillaan ja muut spritet liikkuvat vasemmalle.
+- Kentässä soi nyt musiikki. Ruudun liikettä on pyritty synkkaamaan musiikin tahtiin, mutta sen kanssa on toistaiseksi ollut vaikeuksia.
+- Aloitusruutu ja päävalikko lisätty. Päävalikosta voi valita kentän, muuta informaatiota ei ainakaan vielä näy.
+- Päävalikkoon voi palata, kun kenttä on läpäisty. Pelisilmukkaan on siis lisätty toinen kerros.
+- Liikkuminen on muutettu vapaasta liikkeestä automaattisesti etenevään muotoon. Muutos on tehty ajankäyttösyistä.
+- Testattu kellon, tason ja esteen ominaisuuksia.

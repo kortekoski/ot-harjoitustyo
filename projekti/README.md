@@ -12,6 +12,8 @@ Sovelluksen visio on tasohyppelypeli, jossa liikutaan musiikin rytmiss√§. Pelin√
 
 [Changelog](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
 
+[Arkkitehtuurikuvaus](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
+
 ## Komentorivitoiminnot
 
 ### Suorittaminen
