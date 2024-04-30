@@ -5,7 +5,17 @@ WHITE = (255, 255, 255)
 
 
 class Renderer:
+    """Controls the display window and draws sprites on it.
+    """
+
     def __init__(self, display, center, level=None):
+        """Generates a new Renderer instance.
+
+        Args:
+            display: A pygame display which contains all graphical elements of the game.
+            center: The coordinates for the center of the display as a tuple.
+            level: The level that should be rendered on screen. Defaults to None.
+        """
         self._display = display
         self._level = level
         self._center_x = center[0]
@@ -14,9 +24,24 @@ class Renderer:
         self._screen_heigth = display.get_size()[1]
 
     def set_level(self, level):
+        """Sets the level to be rendered.
+
+        Args:
+            level: The level to be rendered.
+        """
         self._level = level
 
     def render(self, coins, stars, failed, success):
+        """Draws the sprites of the currently chosen level.
+
+        If the player beats or fails a level, suitable texts are rendered.
+
+        Args:
+            coins: The amount of coins collected.
+            stars: The amount of stars collected.
+            failed: If the player has failed.
+            success: If the player has succeeded.
+        """
         self._level.all_sprites.draw(self._display)
         self._render_info_texts(coins, stars)
 
@@ -33,12 +58,19 @@ class Renderer:
         pygame.display.update()
 
     def render_introscreen(self):
+        """Renders the intro screen.
+        """
         self._render_text("GAME", 100)
         self._render_text("Press ENTER to start or ESC to quit",
                           32, self._center_x, self._center_y + 50)
         pygame.display.update()
 
     def render_menu(self, chosen_level=0):
+        """Renders the menu.
+
+        Args:
+            chosen_level: The currently chosen level number. Defaults to 0, the first level.
+        """
         self._display.fill((0, 0, 0))
         self._render_text("CHOOSE LEVEL", 75, self._center_x, 50)
         self._render_text(str(chosen_level), 100)
@@ -47,6 +79,8 @@ class Renderer:
         pygame.display.update()
 
     def render_pause(self):
+        """Renders the pause window.
+        """
         pause_screen = pygame.Rect(
             0, 0, self._screen_width/2, self._screen_heigth/3)
         pause_screen.center = (self._center_x, self._center_y)

@@ -2,6 +2,12 @@ import pygame
 
 
 class Clock:
+    """Controls the refresh rate of the game.
+
+    Attributes:
+        clock: A pygame Clock object for tracking time.
+    """
+
     def __init__(self):
         self._clock = pygame.time.Clock()
 
@@ -20,4 +26,9 @@ class Clock:
         return delta_time
 
     def get_ticks(self):
+        """Returns the time elapsed since the game was started, in milliseconds.
+
+        Returns:
+            int: Time since the game was started.
+        """
         return pygame.time.get_ticks()

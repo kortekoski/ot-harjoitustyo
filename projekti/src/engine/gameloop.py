@@ -8,7 +8,33 @@ dirname = os.path.dirname(__file__)
 
 
 class GameLoop:
+    """This class contains the logic running the game, i.e. the *game loop*. 
+
+    Attributes:
+        level_maps: All the levels in the game.
+        level: The level that is currently selected.
+        renderer: Controls the display, draws sprites on the screen.
+        event_queue: Gets the events (e.g. button presses) from the pygame events.
+        clock: Controls the refresh rate of the game.
+        cell_size: The size of the cells in the level, in pixels.
+        failed: If the player has failed a level.
+        success: If the player has succeeded in a level.
+        coins: How many coins have been collected.
+        stars: How many stars have been collected.
+        chosen_level: The currently chosen level number in the menu.
+        dt: Delta time, the time elapsed since the previous tick of the clock.
+    """
+
     def __init__(self, level_maps, renderer, event_queue, clock, cell_size):
+        """Creates a new gameloop instance.
+
+        Args:
+            level_maps (list): All the levels in the game.
+            renderer (Renderer): Controls the display, draws sprites on the screen.
+            event_queue (EventQueue): Gets the events (e.g. button presses) from the pygame events.
+            clock (Clock): Controls the refresh rate of the game.
+            cell_size (int): The size of the cells in the level, in pixels.
+        """
         self._level_maps = level_maps
         self._level = None
         self._renderer = renderer
@@ -27,14 +53,20 @@ class GameLoop:
 
         self.dt = 0
 
-    def start(self, skip_intro=False):
-        if not skip_intro:
-            while True:
-                if self._check_start():
-                    break
+    def start(self):
+        """Starts and plays the game.
 
-                self._render_introscreen()
-                self._clock.tick(60)
+        The three loops are as follows: 1. intro screen, 2. menu, 3. level.
+        The menu and level loops are contained in one big loop, 
+        since movement occurs between the two views.
+        """
+        # Intro screen loop
+        while True:
+            if self._check_start():
+                break
+
+            self._render_introscreen()
+            self._clock.tick(60)
 
         while True:
 
@@ -50,9 +82,7 @@ class GameLoop:
                 self._level_maps[self._chosen_level], self._cell_size)
             self._renderer.set_level(self._level)
 
-            pygame.mixer.music.load(os.path.join(
-                dirname, "..", "assets", "test_track.mp3"))
-            pygame.mixer.music.play(-1)
+            self._play_music()
 
             # Level loop
             while True:
@@ -68,25 +98,33 @@ class GameLoop:
 
                 # The game logic is mostly here: what happens when the level is being played.
                 if not self._failed and not self._success:
-                    if self._paused:
-                        self._render_pause()
-                    else:
-                        self._gravity()
-                        self._handle_player_movement()
-                        self._scroll_level(self.dt)
-
-                        self._check_success()
-                        self._check_fail()
-
-                        self._render()
-
-                    self.dt = self._clock.tick(60)
+                    self._main_loop()
                 else:
                     self._render()
                     self._clock.tick(60)
 
                 self._handle_fist()
                 self._collect()
+
+    def _play_music(self):
+        pygame.mixer.music.load(os.path.join(
+            dirname, "..", "assets", "test_track.mp3"))
+        pygame.mixer.music.play(-1)
+
+    def _main_loop(self):
+        if self._paused:
+            self._render_pause()
+        else:
+            self._gravity()
+            self._handle_player_movement()
+            self._scroll_level(self.dt)
+
+            self._check_success()
+            self._check_fail()
+
+            self._render()
+
+        self.dt = self._clock.tick(60)
 
     def _check_success(self):
         if self._level.player_succeeded():
@@ -153,30 +191,34 @@ class GameLoop:
     def _handle_events(self):
         for event in self._event_queue.get():
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:
-                    self._toggle_pause()
-                if event.key == pygame.K_r:
-                    self._level.restart_level()
-                    self._reset_values()
-                    pygame.mixer.music.play(-1)
-                    return None
-                if event.key == pygame.K_z:
-                    self._level.player_attack()
-                    return None
-                if event.key == pygame.K_ESCAPE:
-                    if self._paused:
-                        self._toggle_pause()
-                        return False
-                    elif self._failed:
-                        self._reset_level()
-                        return False
-                    else:
-                        pygame.quit()
-                if event.key == pygame.K_RETURN:
-                    return True
-                return None
+                return self._handle_events_keys(event)
             if event.type == pygame.QUIT:
                 return False
+        return None
+
+    def _handle_events_keys(self, event):
+        if event.key == pygame.K_p:
+            self._toggle_pause()
+            return None
+        if event.key == pygame.K_r:
+            self._level.restart_level()
+            self._reset_values()
+            pygame.mixer.music.play(-1)
+            return None
+        if event.key == pygame.K_z:
+            self._level.player_attack()
+            return None
+        if event.key == pygame.K_ESCAPE:
+            if self._paused:
+                self._toggle_pause()
+                return False
+            if self._failed:
+                self._reset_level()
+                return False
+
+            pygame.quit()
+        if event.key == pygame.K_RETURN:
+            return True
         return None
 
     def _render(self):
