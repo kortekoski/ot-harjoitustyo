@@ -14,4 +14,5 @@
 | 23.4.  | 5    | ruudun liike, päävalikko, hahmon liikkeen muutos, testikattavuuden lisäys |
 | 30.4.  | 3    | pause, muuttuva hyppykorkeus, musiikin synkkaus ruutuun |
 | 30.4.  | 2    | testien laajennuksia |
-| yht   | 33    | |
+| 30.4.  | 2    | dokumentointia (docstringit, käyttöohje) |
+| yht   | 35    | |
