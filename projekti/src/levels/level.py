@@ -159,7 +159,7 @@ class Level:
             else:
                 self.player.rect.bottom = colliding_platform.rect.top
 
-    def jump_player(self):
+    def jump_player(self, pressed):
         if self._player_can_move(0, -self.player.jump_velocity):
             self.player.rect.y -= self.player.jump_velocity
         else:
@@ -167,9 +167,16 @@ class Level:
 
         self.player.jump_velocity -= self.player.jump_gravity
 
+        print("Velocity:", self.player.jump_velocity)
+
         if self.player.jump_velocity < -self.player.jump_height:
             self.player.jumping = False
             self.player.jump_velocity = self.player.jump_height
+
+        if pressed:
+            if self.player.jump_counter < self.player.max_jump_bonus:
+                self.player.jump_velocity += 1
+                self.player.jump_counter += 1
 
     def gravity(self):
         if self._player_can_move(0, self.g):
@@ -251,8 +258,11 @@ class Level:
         return None
 
     def scroll_level(self, delta_time):
-        # The scrolling happens by moving sprites, not the display.
-        # It remains to be seen if this is a smart way to do this.
+        """Moves non-player sprites to the left, creating a scrolling effect.
+        
+        Args:
+            delta_time: Controls the movement speed.
+        """
 
         for sprite in self.np_sprites:
             self.move_sprite(sprite, (-self.speed * delta_time))
@@ -261,5 +271,7 @@ class Level:
             self.move_player(-self.speed * delta_time)
 
     def nuke(self):
+        """Kills every sprite in the level.       
+        """
         for sprite in self.all_sprites:
             sprite.kill()

@@ -19,6 +19,7 @@ class GameLoop:
         # These could be moved to a class called "State" or something
         self._failed = False
         self._success = False
+        self._paused = False
         self._coins = 0
         self._stars = 0
 
@@ -37,6 +38,7 @@ class GameLoop:
 
         while True:
 
+            # Menu or level select loop
             while True:
                 if self._handle_menu_events():
                     break
@@ -52,29 +54,32 @@ class GameLoop:
                 dirname, "..", "assets", "test_track.mp3"))
             pygame.mixer.music.play(-1)
 
+            # Level loop
             while True:
                 events = self._handle_events()
 
                 if events is False:
                     break
 
+                # Returns to the level select menu if the level is cleared and enter is pressed.
                 if events is True and self._success is True:
-                    pygame.mixer.music.stop()
-                    self._level.nuke()
-                    self._level = None
-                    self._success = False
+                    self._reset_level()
                     break
 
+                # The game logic is mostly here: what happens when the level is being played.
                 if not self._failed and not self._success:
-                    self._gravity()
-                    self._handle_player_movement()
-                    self._scroll_level(self.dt)
+                    if self._paused:
+                        self._render_pause()
+                    else:
+                        self._gravity()
+                        self._handle_player_movement()
+                        self._scroll_level(self.dt)
 
-                    self._check_success()
-                    self._check_fail()
+                        self._check_success()
+                        self._check_fail()
 
-                    self._render()
-
+                        self._render()
+                    
                     self.dt = self._clock.tick(60)
                 else:
                     self._render()
@@ -100,7 +105,7 @@ class GameLoop:
             self._level.player.jumping = True
 
         if self._level.player.jumping:
-            self._level.jump_player()
+            self._level.jump_player(keys[pygame.K_SPACE])
 
         if self._level.fist:
             self._level.set_fist()
@@ -117,13 +122,20 @@ class GameLoop:
         self._coins = 0
         self._stars = 0
 
+    def _reset_level(self):
+        self._reset_values()
+        pygame.mixer.music.stop()
+        self._level.nuke()
+        self._level = None
+        self._paused = False
+
     def _handle_menu_events_arrows(self, event):
         if event.key == pygame.K_LEFT:
             if self._chosen_level > 0:
                 self._chosen_level -= 1
 
         if event.key == pygame.K_RIGHT:
-            if self._chosen_level < 10:
+            if self._chosen_level < len(self._level_maps)-1:
                 self._chosen_level += 1
 
     def _handle_menu_events(self):
@@ -141,6 +153,8 @@ class GameLoop:
     def _handle_events(self):
         for event in self._event_queue.get():
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    self._toggle_pause()
                 if event.key == pygame.K_r:
                     self._level.restart_level()
                     self._reset_values()
@@ -150,7 +164,14 @@ class GameLoop:
                     self._level.player_attack()
                     return None
                 if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
+                    if self._paused:
+                        self._toggle_pause()
+                        return False
+                    elif self._failed:
+                        self._reset_level()
+                        return False
+                    else:
+                        pygame.quit()
                 if event.key == pygame.K_RETURN:
                     return True
                 return None
@@ -167,6 +188,9 @@ class GameLoop:
 
     def _render_menu(self, chosen_level):
         self._renderer.render_menu(chosen_level)
+
+    def _render_pause(self):
+        self._renderer.render_pause()
 
     def _handle_fist(self):
         self._level.handle_fist()
@@ -189,3 +213,9 @@ class GameLoop:
                     sys.exit()
                 return None
         return None
+
+    def _toggle_pause(self):
+        if self._paused:
+            self._paused = False
+        else:
+            self._paused = True

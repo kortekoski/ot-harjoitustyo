@@ -29,3 +29,11 @@
 - Päävalikkoon voi palata, kun kenttä on läpäisty. Pelisilmukkaan on siis lisätty toinen kerros.
 - Liikkuminen on muutettu vapaasta liikkeestä automaattisesti etenevään muotoon. Muutos on tehty ajankäyttösyistä.
 - Testattu kellon, tason ja esteen ominaisuuksia.
+
+## Viikko 6
+
+- Lisätty pause-ominaisuus p-näppäimeen. Pause pysäyttää pelin ja näyttää oman ruutunsa. Pausesta pääsee takaisin peliin tai päävalikkoon.
+- Kentän läpäisynäkymästä pääsee suoraan päävalikkoon.
+- Säädetty synkkausta musiikkiin, on nyt ehkä vähän parempi? Kello käyttää nyt tarkempaa tick_busy_loop-metodia.
+- Päävalikossa näkyy nyt vain olemassa olevat kentät, ei mielivaltainen määrä kenttiä.
+- Hyppykorkeus muuttuu, jos nappia pitää pohjassa.

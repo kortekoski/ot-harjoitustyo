@@ -1,5 +1,7 @@
 import pygame
 
+BLACK = (0, 0, 0)
+WHITE= (255, 255, 255)
 
 class Renderer:
     def __init__(self, display, center, level=None):
@@ -7,6 +9,8 @@ class Renderer:
         self._level = level
         self._center_x = center[0]
         self._center_y = center[1]
+        self._screen_width = display.get_size()[0]
+        self._screen_heigth = display.get_size()[1]
 
     def set_level(self, level):
         self._level = level
@@ -16,7 +20,9 @@ class Renderer:
         self._render_info_texts(coins, stars)
 
         if failed:
-            self._render_text("FAILED, press R to restart")
+            self._render_text("FAILED")
+            self._render_text("Press R to restart level, ESC to go to menu",
+                              20, self._center_x, self._center_y+20)
 
         if success:
             self._render_text("SUCCESS!!")
@@ -39,13 +45,22 @@ class Renderer:
                           20, self._center_x, self._center_y + 100)
         pygame.display.update()
 
+    def render_pause(self):
+        pause_screen = pygame.Rect(0, 0, self._screen_width/2, self._screen_heigth/3)
+        pause_screen.center = (self._center_x, self._center_y)
+        pygame.draw.rect(self._display, BLACK, pause_screen)
+        self._render_text("GAME PAUSED")
+        self._render_text("Return to menu with ESC", 20, self._center_x, self._center_y+30)
+
+        pygame.display.update()
+
     def _render_info_texts(self, coins, stars):
         self._render_text(f"Coins: {coins}", 20, 25, 25)
         self._render_text(f"Stars: {stars}", 20, 25, 45)
 
     def _render_text(self, text, size=32, x=0, y=0):
         font = pygame.font.Font(None, size)
-        text = font.render(text, True, (255, 255, 255))
+        text = font.render(text, True, WHITE)
         text_rect = text.get_rect()
 
         if x == 0 and y == 0:

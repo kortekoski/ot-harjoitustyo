@@ -12,4 +12,5 @@
 | 16.4.  | 5    | liikkumisen parannus, uudet spritet (nyrkki, kolikko, tähti, este), lisää testejä, selvittelyä kun uusien ominaisuuksien lisääminen johtaa vanhojen räjähtämiseen |
 | 22.4.  | 4    | ruudun liike |
 | 23.4.  | 5    | ruudun liike, päävalikko, hahmon liikkeen muutos, testikattavuuden lisäys |
-| yht   | 28    | |
+| 30.4.  | 3    | pause, muuttuva hyppykorkeus, musiikin synkkaus ruutuun |
+| yht   | 31    | |
