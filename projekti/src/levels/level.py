@@ -12,7 +12,34 @@ BPM = 130
 
 
 class Level:
+    """Represents a level. Creates sprites based on
+    the level map and controls them.
+
+    Attributes:
+        cell_size: The size of the cells constituting the levels.
+        level_map: Denotes where the sprites are in the level.
+        player: The sprite of the player character.
+        fist: The sprite of the player character's big yellow fist (BYF).
+        platforms: Group for platform sprites.
+        obstacles: Group for obstacle sprites.
+        coins: Group for coin sprites.
+        stars: Group for star sprites.
+        backgrounds: Group for background sprites.
+        goal: Group for goal sprites.
+        fire: Group for fire sprites.
+        g: As in gravity G's. Drops the player sprite.
+        speed: How fast the scrolling sprites move.
+        all_sprites: Group of all the sprite groups.
+        np_sprites: Group of all groups of non-playable sprites,
+        i.e. the sprites that scroll to the left.
+    """
     def __init__(self, level_map, cell_size):
+        """Creates a new Level instance.
+
+        Args:
+            level_map: Denotes where all sprites in the level are.
+            cell_size: Denotes the size of the cells in the level.
+        """
         self.cell_size = cell_size
         self.level_map = level_map
         self.player = None
@@ -43,6 +70,13 @@ class Level:
         self.speed = new_speed
 
     def _initialize_sprites(self, level_map):
+        """Creates the sprites for the level based on the level map.
+
+        Each number in the level map corresponds to a certain sprite.
+
+        Args:
+            level_map: A list containing the positions of the sprites.
+        """
         height = len(level_map)
         width = len(level_map[0])
 
@@ -74,6 +108,13 @@ class Level:
         )
 
     def _add_sprite(self, cell, normalized_x, normalized_y):
+        """Adds a sprite to the specified coordinate.
+
+        Args:
+            cell: The integer in the level map. Corresponds to a sprite.
+            normalized_x: The position of the sprite on the x-axis.
+            normalized_y: The position of the sprite on the y-axis.
+        """
         self.backgrounds.add(Background((normalized_x, normalized_y)))
 
         if cell == 1:
@@ -107,6 +148,15 @@ class Level:
         self.player.rect.move_ip(dx, dy)
 
     def _player_can_move(self, x=0, y=0):
+        """Checks if the player can move to a specified position.
+
+        Args:
+            x: How many pixels the player would move to the right. Defaults to 0.
+            y: How many pixels the player would move down. Defaults to 0.
+
+        Returns:
+            boolean: If the player can move to the position.
+        """
         self.player.rect.move_ip(x, y)
 
         colliding_platforms = pygame.sprite.spritecollide(
