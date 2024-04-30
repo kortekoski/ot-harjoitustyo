@@ -1,7 +1,8 @@
 import pygame
 
 BLACK = (0, 0, 0)
-WHITE= (255, 255, 255)
+WHITE = (255, 255, 255)
+
 
 class Renderer:
     def __init__(self, display, center, level=None):
@@ -46,11 +47,13 @@ class Renderer:
         pygame.display.update()
 
     def render_pause(self):
-        pause_screen = pygame.Rect(0, 0, self._screen_width/2, self._screen_heigth/3)
+        pause_screen = pygame.Rect(
+            0, 0, self._screen_width/2, self._screen_heigth/3)
         pause_screen.center = (self._center_x, self._center_y)
         pygame.draw.rect(self._display, BLACK, pause_screen)
         self._render_text("GAME PAUSED")
-        self._render_text("Return to menu with ESC", 20, self._center_x, self._center_y+30)
+        self._render_text("Return to menu with ESC", 20,
+                          self._center_x, self._center_y+30)
 
         pygame.display.update()
 

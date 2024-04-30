@@ -37,3 +37,4 @@
 - Säädetty synkkausta musiikkiin, on nyt ehkä vähän parempi? Kello käyttää nyt tarkempaa tick_busy_loop-metodia.
 - Päävalikossa näkyy nyt vain olemassa olevat kentät, ei mielivaltainen määrä kenttiä.
 - Hyppykorkeus muuttuu, jos nappia pitää pohjassa.
+- Testattu etenkin pelisilmukan ominaisuuksia.

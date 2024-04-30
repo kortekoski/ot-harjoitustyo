@@ -13,4 +13,5 @@
 | 22.4.  | 4    | ruudun liike |
 | 23.4.  | 5    | ruudun liike, päävalikko, hahmon liikkeen muutos, testikattavuuden lisäys |
 | 30.4.  | 3    | pause, muuttuva hyppykorkeus, musiikin synkkaus ruutuun |
-| yht   | 31    | |
+| 30.4.  | 2    | testien laajennuksia |
+| yht   | 33    | |

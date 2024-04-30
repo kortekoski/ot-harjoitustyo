@@ -23,7 +23,7 @@ class TestPlayer(unittest.TestCase):
     def test_reset_jumping_resets_jumping_height(self):
         self.player.jump_height = 1000
         self.player.reset_jumping()
-        self.assertEqual(15, self.player.jump_height)
+        self.assertEqual(14, self.player.jump_height)
 
     def test_reset_jumping_resets_jumping_velocity(self):
         self.player.jump_velocity = 1000

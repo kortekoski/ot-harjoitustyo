@@ -259,7 +259,7 @@ class Level:
 
     def scroll_level(self, delta_time):
         """Moves non-player sprites to the left, creating a scrolling effect.
-        
+
         Args:
             delta_time: Controls the movement speed.
         """

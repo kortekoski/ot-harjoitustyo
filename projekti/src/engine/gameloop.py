@@ -79,7 +79,7 @@ class GameLoop:
                         self._check_fail()
 
                         self._render()
-                    
+
                     self.dt = self._clock.tick(60)
                 else:
                     self._render()
