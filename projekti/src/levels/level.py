@@ -167,8 +167,6 @@ class Level:
 
         self.player.jump_velocity -= self.player.jump_gravity
 
-        print("Velocity:", self.player.jump_velocity)
-
         if self.player.jump_velocity < -self.player.jump_height:
             self.player.jumping = False
             self.player.jump_velocity = self.player.jump_height

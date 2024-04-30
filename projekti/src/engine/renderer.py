@@ -6,6 +6,9 @@ WHITE = (255, 255, 255)
 
 class Renderer:
     """Controls the display window and draws sprites on it.
+
+    Attributes:
+        display: 
     """
 
     def __init__(self, display, center, level=None):
