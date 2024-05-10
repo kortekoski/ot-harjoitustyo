@@ -5,6 +5,7 @@ from engine.renderer import Renderer
 from engine.clock import Clock
 from engine.gameloop import GameLoop
 from levels.level import Level
+from database.db_service import DatabaseService
 
 
 def post_key(key):
@@ -44,8 +45,9 @@ class TestGameLoop(unittest.TestCase):
         screen_center = (5, 5)
         renderer = Renderer(screen, screen_center)
         clock = Clock()
+        database_service = DatabaseService()
         self.game_loop = GameLoop(level_maps, renderer, event_queue,
-                                  clock, CELL_SIZE)
+                                  clock, database_service, CELL_SIZE)
         self.game_loop._level = self.level1
 
     def test_gameloop_exists(self):

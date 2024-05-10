@@ -4,6 +4,7 @@ from engine.clock import Clock
 from engine.eventqueue import EventQueue
 from engine.gameloop import GameLoop
 from engine.renderer import Renderer
+from database.db_service import DatabaseService
 
 LEVEL_MAP = [[0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
@@ -46,8 +47,9 @@ def main():
     event_queue = EventQueue()
     renderer = Renderer(screen, screen_center)
     clock = Clock()
+    database_service = DatabaseService()
     game_loop = GameLoop(level_maps, renderer, event_queue,
-                         clock, CELL_SIZE)
+                         clock, database_service, CELL_SIZE)
 
     game_loop.start()
 

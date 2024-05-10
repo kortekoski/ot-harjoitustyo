@@ -15,4 +15,6 @@
 | 30.4.  | 3    | pause, muuttuva hyppykorkeus, musiikin synkkaus ruutuun |
 | 30.4.  | 2    | testien laajennuksia |
 | 30.4.  | 2    | dokumentointia (docstringit, käyttöohje) |
-| yht   | 35    | |
+| 10.5.  | 1    | kartoitettu tiedon tallettamista, päädytty ja tutustuttu sqlite3-kirjastoon |
+| 10.5.  | 2    | raamit tietokantaluokalle |
+| yht   | 38    | |

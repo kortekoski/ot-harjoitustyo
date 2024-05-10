@@ -25,7 +25,7 @@ class GameLoop:
         dt: Delta time, the time elapsed since the previous tick of the clock.
     """
 
-    def __init__(self, level_maps, renderer, event_queue, clock, cell_size):
+    def __init__(self, level_maps, renderer, event_queue, clock, db_service, cell_size):
         """Creates a new gameloop instance.
 
         Args:
@@ -41,6 +41,7 @@ class GameLoop:
         self._event_queue = event_queue
         self._clock = clock
         self._cell_size = cell_size
+        self._db_service = db_service
 
         # These could be moved to a class called "State" or something
         self._failed = False
@@ -48,6 +49,7 @@ class GameLoop:
         self._paused = False
         self._coins = 0
         self._stars = 0
+        self._slot = 1
 
         self._chosen_level = 0
 
@@ -67,6 +69,15 @@ class GameLoop:
 
             self._render_introscreen()
             self._clock.tick(60)
+
+        while True:
+            if self._handle_menu_events():
+                break
+
+            self._render_slotscreen(self._slot)
+            self._clock.tick(60)
+
+        self._chosen_level = 1
 
         while True:
 
@@ -171,10 +182,14 @@ class GameLoop:
         if event.key == pygame.K_LEFT:
             if self._chosen_level > 0:
                 self._chosen_level -= 1
+            if self._slot > 1:
+                self._slot -= 1
 
         if event.key == pygame.K_RIGHT:
             if self._chosen_level < len(self._level_maps)-1:
                 self._chosen_level += 1
+            if self._slot < 3:
+                self._slot += 1
 
     def _handle_menu_events(self):
         for event in self._event_queue.get():
@@ -230,6 +245,9 @@ class GameLoop:
 
     def _render_menu(self, chosen_level):
         self._renderer.render_menu(chosen_level)
+
+    def _render_slotscreen(self, slot):
+        self._renderer.render_slotscreen(slot)
 
     def _render_pause(self):
         self._renderer.render_pause()
