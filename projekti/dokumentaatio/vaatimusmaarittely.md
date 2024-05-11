@@ -38,8 +38,8 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 - Kentässä on myös vähemmän erikoisia esineitä (esim. kolikoita), jotka saa kun hahmo osuu niihin. (TEHTY)
 
 ### Tallentaminen
-- Aluksi auki on vain kenttä 1. Seuraavat kentät aukeavat, kun edeltävät saa läpäistyä. 
-- Edistymisen saa tallennettua kolmeen eri tallennuspaikkaan siten, että avatut kentät ja kerätyt esineet pysyvät muistissa.
+- Aluksi auki on vain kenttä 1. Seuraavat kentät aukeavat, kun edeltävät saa läpäistyä. (TEHTY)
+- Edistymisen saa tallennettua kolmeen eri tallennuspaikkaan siten, että avatut kentät ja kerätyt esineet pysyvät muistissa. (TEHTY)
 - Tallennuspaikan voi tyhjentää.
 
 ## Jatkokehitysideoita
