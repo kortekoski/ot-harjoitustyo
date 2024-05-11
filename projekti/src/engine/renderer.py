@@ -68,15 +68,17 @@ class Renderer:
                           32, self._center_x, self._center_y + 50)
         pygame.display.update()
 
-    def render_menu(self, chosen_level=0):
+    def render_menu(self, chosen_level, level_info):
         """Renders the menu.
 
         Args:
-            chosen_level: The currently chosen level number. Defaults to 0, the first level.
+            chosen_level: The currently chosen level number.
+            level_info: Max number of collectibles found in the level.
         """
         self._display.fill((0, 0, 0))
         self._render_text("CHOOSE LEVEL", 75, self._center_x, 50)
         self._render_text(str(chosen_level), 100)
+        self._render_collectibles(level_info)
         self._render_text("Press <- and -> to browse, ENTER to select, BACKSPACE to save menu",
                           20, self._center_x, self._center_y + 100)
         pygame.display.update()
@@ -116,3 +118,17 @@ class Renderer:
         else:
             text_rect.center = (x, y)
         self._display.blit(text, text_rect)
+
+    def _render_collectibles(self, level_info):
+        max_coins = level_info[0]
+        max_stars = level_info[1]
+
+        if len(level_info) > 2:
+            coins_collected = level_info[2]
+            stars_collected = level_info[3]
+        else:
+            coins_collected = 0
+            stars_collected = 0
+
+        self._render_text(f"Coins: {coins_collected}/{max_coins}", 30, self._center_x, self._center_y+50)
+        self._render_text(f"Stars: {stars_collected}/{max_stars}", 30, self._center_x, self._center_y+70)

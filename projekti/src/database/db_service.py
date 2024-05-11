@@ -105,6 +105,25 @@ class DatabaseService:
         level_id = response.fetchone()
         return level_id[0]
     
+    def level_info(self, slot_id, level_id):
+        """Returns the max coins and stars in the level + the amount collected on the save."""
+        sql = f"""SELECT Levels.coins, Levels.stars, SlotsLevels.coins_collected, SlotsLevels.stars_collected 
+            FROM Levels LEFT JOIN SlotsLevels ON Levels.id = SlotsLevels.level_id
+            WHERE SlotsLevels.slot_id={slot_id} AND SlotsLevels.level_id={level_id}"""
+        response = self.cursor.execute(sql)
+        result = response.fetchone()
+
+        if result is not None:
+            return result
+        else:
+            sql2 = f"SELECT coins, stars FROM Levels WHERE id={level_id}"
+            response2 = self.cursor.execute(sql2)
+            result2 = response2.fetchone()
+
+            return result2
+    
+        return None
+    
     def get_slotslevels_by_id(self, slot_id, level_id):
         sql = f"SELECT * FROM SlotsLevels WHERE slot_id={slot_id} AND level_id={level_id}"
         response = self.cursor.execute(sql)

@@ -84,8 +84,8 @@ class GameLoop:
             while True:
                 if self._handle_menu_events():
                     break
-
-                self._render_menu(self._chosen_level)
+                level_info = self._db_service.level_info(self._slot, self._chosen_level)
+                self._render_menu(self._chosen_level, level_info)
                 self.dt = self._clock.tick(60)
 
             self._level = Level(
@@ -260,8 +260,8 @@ class GameLoop:
     def _render_introscreen(self):
         self._renderer.render_introscreen()
 
-    def _render_menu(self, chosen_level):
-        self._renderer.render_menu(chosen_level)
+    def _render_menu(self, chosen_level, level_info):
+        self._renderer.render_menu(chosen_level, level_info)
 
     def _render_slotscreen(self, slot):
         self._renderer.render_slotscreen(slot)
