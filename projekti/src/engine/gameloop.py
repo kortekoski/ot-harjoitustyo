@@ -17,11 +17,14 @@ class GameLoop:
         event_queue: Gets the events (e.g. button presses) from the pygame events.
         clock: Controls the refresh rate of the game.
         cell_size: The size of the cells in the level, in pixels.
+        db_service: Handles communication with the database storing saves.
         failed: If the player has failed a level.
         success: If the player has succeeded in a level.
         coins: How many coins have been collected.
         stars: How many stars have been collected.
+        slot: The chosen save slot.
         chosen_level: The currently chosen level number in the menu.
+        max_level: Biggest unlocked level number.
         dt: Delta time, the time elapsed since the previous tick of the clock.
     """
 
@@ -50,8 +53,10 @@ class GameLoop:
         self._coins = 0
         self._stars = 0
         self._slot = 1
+        self._in_slot_menu = True
 
         self._chosen_level = 0
+        self._max_level = 0
 
         self.dt = 0
 
@@ -70,14 +75,8 @@ class GameLoop:
             self._render_introscreen()
             self._clock.tick(60)
 
-        while True:
-            if self._handle_menu_events():
-                break
-
-            self._render_slotscreen(self._slot)
-            self._clock.tick(60)
-
-        self._chosen_level = 1
+        # Save slot select loop
+        self._save_slot_loop()
 
         while True:
 
@@ -104,6 +103,7 @@ class GameLoop:
 
                 # Returns to the level select menu if the level is cleared and enter is pressed.
                 if events is True and self._success is True:
+                    self._update_database()
                     self._reset_level()
                     break
 
@@ -145,6 +145,18 @@ class GameLoop:
         if self._level.player_dead():
             self._failed = True
 
+    def _update_database(self):
+        """Sends level clear data to the database.
+        First the maximum selectable level is increased, if possible.
+        The max level is fetched from the database to update it in the game.
+        Then the collectible info is stored.
+        """
+        if self._chosen_level < len(self._level_maps) - 1:
+            self._db_service.progress_slot(self._slot, self._chosen_level+1)
+            self._max_level = self._db_service.max_level(self._slot)
+        
+        self._db_service.update_stats(self._slot, self._chosen_level, self._coins, self._stars)
+
     def _handle_player_movement(self):
         keys = pygame.key.get_pressed()
 
@@ -182,14 +194,17 @@ class GameLoop:
         if event.key == pygame.K_LEFT:
             if self._chosen_level > 0:
                 self._chosen_level -= 1
-            if self._slot > 1:
-                self._slot -= 1
+            
+            if self._in_slot_menu:
+                if self._slot > 1:
+                    self._slot -= 1
 
         if event.key == pygame.K_RIGHT:
-            if self._chosen_level < len(self._level_maps)-1:
+            if self._chosen_level < self._max_level:
                 self._chosen_level += 1
-            if self._slot < 3:
-                self._slot += 1
+            if self._in_slot_menu:
+                if self._slot < 3:
+                    self._slot += 1
 
     def _handle_menu_events(self):
         for event in self._event_queue.get():
@@ -197,6 +212,8 @@ class GameLoop:
                 self._handle_menu_events_arrows(event)
                 if event.key == pygame.K_RETURN:
                     return True
+                if not self._in_slot_menu and event.key == pygame.K_BACKSPACE:
+                    self._save_slot_loop()
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
@@ -279,3 +296,17 @@ class GameLoop:
             self._paused = False
         else:
             self._paused = True
+
+    def _save_slot_loop(self):
+        self._in_slot_menu = True
+
+        while True:
+            if self._handle_menu_events():
+                break
+
+            self._render_slotscreen(self._slot)
+            self._clock.tick(60)
+        
+        self._in_slot_menu = False
+        self._max_level = self._db_service.max_level(self._slot)
+        self._chosen_level = 0

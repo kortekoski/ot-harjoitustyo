@@ -1,3 +1,4 @@
+import os
 import pygame
 
 from engine.clock import Clock
@@ -48,6 +49,14 @@ def main():
     renderer = Renderer(screen, screen_center)
     clock = Clock()
     database_service = DatabaseService()
+
+    # Initialize the database if it doesn't exist yet
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    database_directory = os.path.join(current_directory, "database")
+    database_file_path = os.path.join(database_directory, "save.db")
+    if not os.path.exists(database_file_path):
+        database_service.initialize()
+
     game_loop = GameLoop(level_maps, renderer, event_queue,
                          clock, database_service, CELL_SIZE)
 

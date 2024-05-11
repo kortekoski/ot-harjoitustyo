@@ -77,13 +77,13 @@ class Renderer:
         self._display.fill((0, 0, 0))
         self._render_text("CHOOSE LEVEL", 75, self._center_x, 50)
         self._render_text(str(chosen_level), 100)
-        self._render_text("Press <- and -> to browse, ENTER to select",
+        self._render_text("Press <- and -> to browse, ENTER to select, BACKSPACE to save menu",
                           20, self._center_x, self._center_y + 100)
         pygame.display.update()
 
     def render_slotscreen(self, slot=1):
         self._display.fill((0, 0, 0))
-        self._render_text("CHOOSE SAVE SLOT", 75, self._center_x, 50)
+        self._render_text("CHOOSE SAVE SLOT", 65, self._center_x, 50)
         self._render_text(str(slot), 100)
         self._render_text("Press <- and -> to browse, ENTER to select",
                           20, self._center_x, self._center_y + 100)

@@ -43,7 +43,7 @@ class DatabaseService:
             coins_collected INTEGER,
             stars_collected INTEGER
         )""",
-        "INSERT INTO Levels VALUES(1, 3, 3), (2, 3, 3), (3, 3, 3)",
+        "INSERT INTO Levels VALUES(0, 3, 3), (1, 3, 3), (2, 3, 3)",
         "INSERT INTO Slots VALUES(1, 0), (2, 0), (3, 0)"
         ]
 
@@ -90,6 +90,20 @@ class DatabaseService:
         sql = f"SELECT * FROM Slots WHERE id={slot_id}"
         response = self.cursor.execute(sql)
         return response.fetchone()
+    
+    def max_level(self, slot_id):
+        """Determines the maximum unlocked level in the save.
+
+        Args:
+            slot_id: ID for the desired save slot.
+
+        Returns:
+            integer: Maximum unlocked level id.
+        """
+        sql = f"SELECT current_level FROM Slots WHERE id={slot_id}"
+        response = self.cursor.execute(sql)
+        level_id = response.fetchone()
+        return level_id[0]
     
     def get_slotslevels_by_id(self, slot_id, level_id):
         sql = f"SELECT * FROM SlotsLevels WHERE slot_id={slot_id} AND level_id={level_id}"
