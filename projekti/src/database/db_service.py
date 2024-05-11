@@ -43,7 +43,7 @@ class DatabaseService:
             coins_collected INTEGER,
             stars_collected INTEGER
         )""",
-        "INSERT INTO Levels VALUES(0, 3, 3), (1, 3, 3), (2, 3, 3)",
+        "INSERT INTO Levels VALUES(0, 1, 1), (1, 0, 0), (2, 1, 1)",
         "INSERT INTO Slots VALUES(1, 0), (2, 0), (3, 0)"
         ]
 
