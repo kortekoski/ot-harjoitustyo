@@ -214,6 +214,8 @@ class GameLoop:
                     return True
                 if not self._in_slot_menu and event.key == pygame.K_BACKSPACE:
                     self._save_slot_loop()
+                if self._in_slot_menu and event.key == pygame.K_DELETE:
+                    self._delete_slot_loop()
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
@@ -310,3 +312,28 @@ class GameLoop:
         self._in_slot_menu = False
         self._max_level = self._db_service.max_level(self._slot)
         self._chosen_level = 0
+
+    def _handle_deletion_events(self):
+        for event in self._event_queue.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    return True
+                if event.key == pygame.K_BACKSPACE:
+                    return False
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+            return None
+        return None
+
+    def _delete_slot_loop(self):
+        while True:
+            returned = self._handle_deletion_events()
+            if returned is True:
+                self._db_service.clear_slot(self._slot)
+                break
+            if returned is False:
+                break
+
+            self._renderer.render_delete_slotscreen(self._slot)
+            self._clock.tick(60)

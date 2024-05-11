@@ -76,6 +76,17 @@ class DatabaseService:
             sql = f"UPDATE Slots SET current_level={new_level} WHERE id={slot_id}"
             self._execute_sql(sql)
 
+    def clear_slot(self, slot_id):
+        """Clears a save slot of all progress.
+
+        Args:
+            slot_id: ID of the slot that should be cleared.
+        """
+        sql = f"DELETE FROM SlotsLevels WHERE slot_id={slot_id}"
+        self._execute_sql(sql)
+        sql = f"UPDATE Slots SET current_level=0 WHERE id={slot_id}"
+        self._execute_sql(sql)
+
     def _get_slots(self):
         sql = "SELECT * FROM Slots"
         response = self.cursor.execute(sql)

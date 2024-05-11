@@ -17,5 +17,6 @@
 | 30.4.  | 2    | dokumentointia (docstringit, käyttöohje) |
 | 10.5.  | 1    | kartoitettu tiedon tallettamista, päädytty ja tutustuttu sqlite3-kirjastoon |
 | 10.5.  | 2    | raamit tietokantaluokalle |
-| 11.5.  | 2    | tallennustilan valintaruutu, eteneminen tallentuu tietokantaan |
-| yht   | 40    | |
+| 11.5.  | 3    | tallennustilan valintaruutu, eteneminen tallentuu tietokantaan, kerätyt tavarat näkyvät valikossa |
+| 12.5.  | 1    | madhdollisuus poistaa tallennustiedot |
+| yht   | 41    | |

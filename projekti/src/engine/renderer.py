@@ -87,7 +87,14 @@ class Renderer:
         self._display.fill((0, 0, 0))
         self._render_text("CHOOSE SAVE SLOT", 65, self._center_x, 50)
         self._render_text(str(slot), 100)
-        self._render_text("Press <- and -> to browse, ENTER to select",
+        self._render_text("Press <- and -> to browse, ENTER to select, DEL to clear slot",
+                          20, self._center_x, self._center_y + 100)
+        pygame.display.update()
+
+    def render_delete_slotscreen(self, slot):
+        self._display.fill((0, 0, 0))
+        self._render_text(f"Clear save data from slot {slot}?", 50, self._center_x, self._center_y)
+        self._render_text("ENTER to confirm, BACKSPACE to cancel",
                           20, self._center_x, self._center_y + 100)
         pygame.display.update()
 

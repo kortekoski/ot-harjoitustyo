@@ -9,8 +9,8 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 ### Perusnäkymä (päävalikko)
 - Perusnäkymä aukeaa, kun sovelluksen avaa. (TEHTY)
 - Perusnäkymästä voi valita kentän. (TEHTY)
-- Perusnäkymästä voi valita tallennuspaikan.
-- Kentän kohdalla näkyy nimi ja esittelykuva. Jos kenttä on jo läpäisty, näkyvät myös kerätyt esineet.
+- Perusnäkymästä voi valita tallennuspaikan. (TEHTY)
+- Kentän kohdalla näkyy numero ja kerätyt esineet. (TEHTY)
 
 ### Pelinäkymä
 - Pelinäkymä aukeaa, kun kenttä on valittu. (TEHTY)
@@ -22,10 +22,10 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 - Pelinäkymässä soi taustamusiikki. (TEHTY)
 - Pelinäkymästä siirrytään takaisin päävalikkoon, kun hahmo pääsee kentän loppuun. (TEHTY)
 
-### Pelaajan hahmo (TEHTY)
-- Kävely: hahmo liikkuu x-akselilla itsestään.
-- Hyppy: hahmo liikkuu y-akselilla ylöspäin välilyönnin painalluksesta, pohjassa pitäminen lisää korkeutta.
-- Lyönti: hahmo iskee esteen rikki z-näppäimen painalluksesta.
+### Pelaajan hahmo
+- Kävely: hahmo liikkuu x-akselilla itsestään. (TEHTY)
+- Hyppy: hahmo liikkuu y-akselilla ylöspäin välilyönnin painalluksesta, pohjassa pitäminen lisää korkeutta. (TEHTY)
+- Lyönti: hahmo iskee esteen rikki z-näppäimen painalluksesta. (TEHTY)
 
 ### Kenttä
 - Kenttä koostuu erinäisistä tasoista, joiden päällä hahmo voi liikkua tippumatta alas. Jos hahmo tippuu ruudun alalaitaan, kenttä on aloitettava alusta. (TEHTY)
@@ -40,7 +40,7 @@ Sovellus on tasohyppely- ja rytmipelin risteytys, jossa pelaaja juoksee eteenpä
 ### Tallentaminen
 - Aluksi auki on vain kenttä 1. Seuraavat kentät aukeavat, kun edeltävät saa läpäistyä. (TEHTY)
 - Edistymisen saa tallennettua kolmeen eri tallennuspaikkaan siten, että avatut kentät ja kerätyt esineet pysyvät muistissa. (TEHTY)
-- Tallennuspaikan voi tyhjentää.
+- Tallennuspaikan voi tyhjentää. (TEHTY)
 
 ## Jatkokehitysideoita
 - Käyttäjä voi itse määritellä pelin näppäimet.
