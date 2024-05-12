@@ -6,17 +6,17 @@ Sovelluksen visio on tasohyppelypeli, jossa liikutaan musiikin rytmissä. Pelin�
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmäärittely](https://github.com/kortekoski/ot-harjoitustyo/blob/main/projekti/dokumentaatio/vaatimusmaarittely.md)
 
-[Työaikakirjanpito](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
+[Työaikakirjanpito](https://github.com/kortekoski/ot-harjoitustyo/blob/main/projekti/dokumentaatio/tuntikirjanpito.md)
 
-[Changelog](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
+[Changelog](https://github.com/kortekoski/ot-harjoitustyo/blob/main/projekti/dokumentaatio/changelog.md)
 
-[Arkkitehtuurikuvaus](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
+[Arkkitehtuurikuvaus](https://github.com/kortekoski/ot-harjoitustyo/blob/main/projekti/dokumentaatio/arkkitehtuuri.md)
 
-[Testaus](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/testaus.md)
+[Testaus](https://github.com/kortekoski/ot-harjoitustyo/blob/main/projekti/dokumentaatio/testaus.md)
 
-[Käyttöohje](https://github.com/kortekoski/ot-harjoitustyo/blob/main/dokumentaatio/kayttoohje.md)
+[Käyttöohje](https://github.com/kortekoski/ot-harjoitustyo/blob/main/projekti/dokumentaatio/kayttoohje.md)
 
 ## Komentorivitoiminnot
 
