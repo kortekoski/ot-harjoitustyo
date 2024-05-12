@@ -36,3 +36,8 @@ poetry run invoke coverage-report
 ```
 
 Raportti löytyy hakemistosta _htmlcov_.
+
+### Pylint
+```bash
+poetry run invoke lint
+```
