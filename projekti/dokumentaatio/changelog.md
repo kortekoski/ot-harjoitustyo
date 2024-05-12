@@ -38,3 +38,12 @@
 - Päävalikossa näkyy nyt vain olemassa olevat kentät, ei mielivaltainen määrä kenttiä.
 - Hyppykorkeus muuttuu, jos nappia pitää pohjassa.
 - Testattu etenkin pelisilmukan ominaisuuksia.
+
+## Viikko 7 (loppupalautus)
+
+- Lisätty paikallinen sqlite3-tietokanta, joten tieto säilyy pelikertojen välissä. Tietokannan käyttämiseen on tehty uusi luokka.
+- Kentissä edistymisen voi nyt tallentaa kolmelle erilliselle paikalle, jotka voi halutessaan myös tyhjentää.
+- Tallennuspaikan valitsemiselle on tehty oma näkymä.
+- Kentässä kerättyjen kerättävien määrät näkyvät kentänvalintanäkymässä.
+- Kentän tiedot ladataan erillisestä tiedostosta sen sijaan, että ne olisivat koodissa.
+- Dokumentaatiota päivitetty.

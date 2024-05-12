@@ -45,10 +45,13 @@ class TestGameLoop(unittest.TestCase):
         screen_center = (5, 5)
         renderer = Renderer(screen, screen_center)
         clock = Clock()
-        database_service = DatabaseService()
+        database_service = DatabaseService("test.db")
         self.game_loop = GameLoop(level_maps, renderer, event_queue,
                                   clock, database_service, CELL_SIZE)
         self.game_loop._level = self.level1
+
+    def tearDown(self):
+        pygame.quit()
 
     def test_gameloop_exists(self):
         self.assertIsNotNone(self.game_loop)
@@ -139,6 +142,7 @@ class TestGameLoop(unittest.TestCase):
         self.assertEqual((true_1, none_1, none_2), (True, None, None))
 
     def test_buttons_change_chosen_level_in_menu(self):
+        self.game_loop._max_level = 3
         none_1 = self.game_loop._handle_menu_events()
         post_key("K_RETURN")
         true_1 = self.game_loop._handle_menu_events()

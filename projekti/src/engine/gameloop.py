@@ -84,7 +84,8 @@ class GameLoop:
             while True:
                 if self._handle_menu_events():
                     break
-                level_info = self._db_service.level_info(self._slot, self._chosen_level)
+                level_info = self._db_service.level_info(
+                    self._slot, self._chosen_level)
                 self._render_menu(self._chosen_level, level_info)
                 self.dt = self._clock.tick(60)
 
@@ -154,8 +155,9 @@ class GameLoop:
         if self._chosen_level < len(self._level_maps) - 1:
             self._db_service.progress_slot(self._slot, self._chosen_level+1)
             self._max_level = self._db_service.max_level(self._slot)
-        
-        self._db_service.update_stats(self._slot, self._chosen_level, self._coins, self._stars)
+
+        self._db_service.update_stats(
+            self._slot, self._chosen_level, self._coins, self._stars)
 
     def _handle_player_movement(self):
         keys = pygame.key.get_pressed()
@@ -194,7 +196,7 @@ class GameLoop:
         if event.key == pygame.K_LEFT:
             if self._chosen_level > 0:
                 self._chosen_level -= 1
-            
+
             if self._in_slot_menu:
                 if self._slot > 1:
                     self._slot -= 1
@@ -230,18 +232,18 @@ class GameLoop:
                 return False
         return None
 
-    def _handle_events_keys(self, event):
+    def _handle_prz(self, event):
         if event.key == pygame.K_p:
             self._toggle_pause()
-            return None
         if event.key == pygame.K_r:
             self._level.restart_level()
             self._reset_values()
             pygame.mixer.music.play(-1)
-            return None
         if event.key == pygame.K_z:
             self._level.player_attack()
-            return None
+
+    def _handle_events_keys(self, event):
+        self._handle_prz(event)
         if event.key == pygame.K_ESCAPE:
             if self._paused:
                 self._toggle_pause()
@@ -299,6 +301,12 @@ class GameLoop:
         else:
             self._paused = True
 
+    def _toggle_slot_menu(self):
+        if self._in_slot_menu:
+            self._in_slot_menu = False
+        else:
+            self._in_slot_menu = True
+
     def _save_slot_loop(self):
         self._in_slot_menu = True
 
@@ -308,7 +316,7 @@ class GameLoop:
 
             self._render_slotscreen(self._slot)
             self._clock.tick(60)
-        
+
         self._in_slot_menu = False
         self._max_level = self._db_service.max_level(self._slot)
         self._chosen_level = 0

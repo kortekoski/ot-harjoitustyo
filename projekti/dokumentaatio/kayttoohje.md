@@ -22,11 +22,15 @@ Aloitusruutu aukeaa. Näkymästä pääsee päävalikkoon painamalla enteriä. J
 
 ![](./kuvat/screen1.png)
 
-Seuraavassa ruudussa valitaan kenttä nuolinäppäimillä, minkä jälkeen peli alkaa enterillä.
+Ensin valitaan tallennuspaikka, johon tallentuu edistyminen kentissä sekä kerätyt kerättävät. Paikka valitaan enterillä. Deletellä tallennuspaikan voi halutessaan tyhjentää.
+
+![](./kuvat/screen1b.png)
+
+Seuraavassa ruudussa valitaan kenttä nuolinäppäimillä, minkä jälkeen peli alkaa enterillä. Aluksi vain taso 0 on auki; seuraava taso aukeaa, kun edellisen pääsee läpi. Takaisin tallennuspaikkavalikkoon pääsee askelapalauttimella.
 
 ![](./kuvat/screen2.png)
 
-Tämän jälkeen pääset itse pelinäkymään:
+Tämän jälkeen pääsee itse pelinäkymään:
 
 ![](./kuvat/screen3.png)
 
@@ -41,10 +45,18 @@ Tässä on vielä esitettynä näppäimet, joilla peliä ohjataan.
 - Enter: Aloittaa pelin.
 - Escape: Sulkee pelin.
 
+### Tallennuspaikkanäkymä
+
+- Nuolinäppäimet: Valitsee tallennuspaikan.
+- Enter: Valitsee tallennuspaikan.
+- Delete: Tyhjentää tallennuspaikan.
+- Escape: Sulkee pelin.
+
 ### Valikkonäkymä
 
 - Nuolinäppäimet: Valitsee kentän.
 - Enter: Aloittaa valitun kentän pelaaminen.
+- Backspace: Palaa tallennuspaikkanäkymään.
 - Escape: Sulkee pelin.
 
 ### Pelinäkymä

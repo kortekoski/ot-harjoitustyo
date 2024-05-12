@@ -16,6 +16,9 @@ class TestLevel(unittest.TestCase):
 
         self.level2 = Level(TEST_MAP_2, CELL_SIZE_2)
 
+        TEST_MAP_3 = [[1, 1, 1],[0, 4, 0], [1, 1, 1]]
+        self.level3 = Level(TEST_MAP_3, 50)
+
     def test_sprites_are_movable(self):
         coin = self.level.coins.sprites()[0]
         starting_position_y = coin.rect.y
@@ -66,3 +69,23 @@ class TestLevel(unittest.TestCase):
             self.level.move_player(-50)
             self.level.collect()
         self.assertEqual(0, len(self.level.coins.sprites()))
+
+    def test_player_gravity_pulls_down(self):
+        self.level.move_player(0, -50)
+        position1 = self.level.player.rect.y
+        self.level.gravity()
+        position2 = self.level.player.rect.y
+        self.assertGreater(position2, position1)
+
+    def test_player_gravity_doesnt_pull_below_object(self):
+        self.level3.move_player(0, +10)
+        position1 = self.level3.player.rect.y
+        self.level3.gravity()
+        position2 = self.level3.player.rect.y
+        self.assertEqual(position2, position1)
+
+    def test_no_jumping_below_object(self):
+        position1 = self.level3.player.rect.y
+        self.level3.jump_player(True)
+        position2 = self.level3.player.rect.y
+        self.assertEqual(position2, position1)

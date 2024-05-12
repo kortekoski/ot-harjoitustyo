@@ -33,6 +33,7 @@ class Level:
         np_sprites: Group of all groups of non-playable sprites,
         i.e. the sprites that scroll to the left.
     """
+
     def __init__(self, level_map, cell_size):
         """Creates a new Level instance.
 

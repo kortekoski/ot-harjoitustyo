@@ -18,5 +18,6 @@
 | 10.5.  | 1    | kartoitettu tiedon tallettamista, päädytty ja tutustuttu sqlite3-kirjastoon |
 | 10.5.  | 2    | raamit tietokantaluokalle |
 | 11.5.  | 3    | tallennustilan valintaruutu, eteneminen tallentuu tietokantaan, kerätyt tavarat näkyvät valikossa |
-| 12.5.  | 1    | madhdollisuus poistaa tallennustiedot |
-| yht   | 41    | |
+| 11.5.  | 2    | mahdollisuus poistaa tallennustiedot, kentät koodin ulkopuolisesta tiedostosta |
+| 12.5.  | 4    | tietokannan testit, lisää kenttiä testailuun, linttaus, dokumentaation päivitys lopulliseen palautukseen |
+| yht   | 46    | |
